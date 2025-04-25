@@ -21,19 +21,19 @@
 </head>
 <body id="login" class="signup">
     <div class="wrapper">
-        <main>
+        <main class="container">
             <h1>Login</h1>
             <form>
                 <ul>
                     <li>
-                        <label for="inUser">Usuário:</label>
+                        <label for="inUser">Nome de Usuário:</label>
                         <br>
-                        <input type="text" id="inUser" maxlength="18" required>
+                        <input type="text" id="inUser" maxlength="18" placeholder="Digite o nome de usuário" required>
                     </li>
                     <li>
                         <label for="inPassword">Senha:</label>
                         <br>
-                        <input type="password" id="inPassword" maxlength="20" required>
+                        <input type="password" id="inPassword" placeholder="Digite a senha" maxlength="20" required>
                     </li>
                     <li id="submit">
                         <input type="submit" value="Entrar">
@@ -41,6 +41,9 @@
                 </ul>
             </form>
         </main>
+        <div id="divGoBack" class="container" onclick="goBack()">
+            <button>Voltar</button>
+        </div>
     </div>
 
     <!-- Custom JS -->

@@ -17,6 +17,7 @@ body, html {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    flex-direction: column;
   }
 
 /* Home, Login, Register */
@@ -25,12 +26,16 @@ body.signup {
     background: #fe7253;
 }
 
-body.signup main {
+body.signup .container {
     margin: 0 auto;
     min-width: 400px;
     width: 50%;
-    background: #feab53;
     border-radius: 25px;
+    padding: 10px;
+}
+
+body.signup main {
+    background: #feab53;
     border: 1px solid blueviolet;
 }
 
@@ -56,6 +61,19 @@ body.signup main ul li a {
     border-radius: 30px;
     text-decoration: none;
     color: black;
+}
+
+body.signup #divGoBack button {
+    height: 35px;
+    font-size: 1rem;
+    background: #f65920;
+    cursor: pointer;
+    border-radius: 25px;
+    width: 75px;
+}
+
+body.signup #divGoBack button:hover {
+    background: #b2441c;
 }
 
 /* Home */
@@ -97,7 +115,6 @@ body#login main form ul li#submit input {
     font-size: 1rem;
     background: #fbca57;
     cursor: pointer;
-    margin-bottom: 10px;
     
 }
 
