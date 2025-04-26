@@ -8,7 +8,7 @@ if (currentUser != null)
     window.location.href = "../public/mainpage.html"
 
 const frm = document.querySelector("form")
-const usernameField = document.querySelector("#inUser")
+const emailField = document.querySelector("#inEmail")
 const passwordField = document.querySelector("#inPassword")
 
 let authenticationFailed = false;
@@ -18,12 +18,14 @@ frm.addEventListener("submit", (e) => {
 
     const users = JSON.parse(localStorage.getItem("users"))
 
-    const user = users[usernameField]
+    const user = users[emailField.value]
 
-    if (user == null)
+    if (user == null || user.password != passwordField.value)
         failAuthentication()
-    
-
+    else {
+        localStorage.setItem("currentUser", JSON.stringify(user))
+        window.location.href = "../public/mainpage.html"
+    }
 
 })
 
@@ -31,7 +33,7 @@ const failAuthentication = () => {
     if (!authenticationFailed) {
         const listItem = document.createElement("li")
         const messageErrorBox = document.createElement("div")
-        const ErrorMessage = document.createTextNode("Usuário ou Senha estão inválidos")
+        const ErrorMessage = document.createTextNode("Email ou Senha estão inválidos")
 
         messageErrorBox.appendChild(ErrorMessage)
         messageErrorBox.style.backgroundColor = "rgba(255, 0, 0, 0.2)"
@@ -45,8 +47,4 @@ const failAuthentication = () => {
 
         authenticationFailed = true
     }
-}
-
-function goBack() {
-    window.location.replace("../index.html")
 }
