@@ -18,15 +18,14 @@ body, html {
     align-items: center;
     height: 100vh;
     flex-direction: column;
-  }
+}
 
-/* Home, Login, Register */
 
-body.signup {
+body {
     background: #fe7253;
 }
 
-body.signup .container {
+body .container {
     margin: 0 auto;
     min-width: 400px;
     width: 50%;
@@ -34,16 +33,16 @@ body.signup .container {
     padding: 10px;
 }
 
-body.signup main {
+body main {
     background: #feab53;
     border: 1px solid blueviolet;
 }
 
-body.signup main h1 {
+body main h1 {
     text-align: center;
 }
 
-body.signup main ul {
+body main ul {
     margin-top: 15px;
     border: 1px solid pink;
     display: flex;
@@ -52,7 +51,7 @@ body.signup main ul {
     list-style: none;
 }
 
-body.signup main ul li a {
+body main ul li a {
     box-sizing: border-box;
     border: 1px solid blueviolet;
     display: block;
@@ -63,7 +62,7 @@ body.signup main ul li a {
     color: black;
 }
 
-body.signup #divGoBack button {
+body #divGoBack button {
     height: 35px;
     font-size: 1rem;
     background: #f65920;
@@ -72,7 +71,7 @@ body.signup #divGoBack button {
     width: 75px;
 }
 
-body.signup #divGoBack button:hover {
+body #divGoBack button:hover {
     background: #b2441c;
 }
 

@@ -4,40 +4,70 @@ if (localStorage.getItem("users") == null)
 if (localStorage.getItem("usedCPFs") == null)
     localStorage.setItem("usedCPFs", "{}")
 
+// Getting the form element to add event listener to "submit" event from it later
 const frm = document.querySelector("form")
 const genderInputs = document.getElementsByName("inGender")
+/*
+genderInputs[0] = Male input
+genderInputs[1] = Female input
+genderInputs[2] = Non Binary input
+*/
 
 const inputs = frm.getElementsByTagName("input")
-for (const input of inputs) {
-    console.log(input.id)
-}
-console.log(inputs.length)
+/*
+inputs[0] = Email input
+inputs[1] = Name input
+inputs[2] = Surname input
+inputs[3] = CPF input
+inputs[4] = Male input
+inputs[5] = Female input
+inputs[6] = Non Binary input
+inputs[7] = BirthDate input
+inputs[8] = Password input
+inputs[9] = Password Confirmation input
+inputs[10] = Submit input
+*/
 
+// flag variable to manage the fail message box
 let registerFailed = false
+// variable to hold the reference of the fail message box to remove it later
 let errorBox
 
+// Adding event listener to event "submit" from form element
+// "submit" event is triggered when submit input button is pressed
 frm.addEventListener("submit", (e) => {
+    // preventing the behavior default from "submit" event
     e.preventDefault()
 
+    // Checking if there's already a fail message box in the screen
     if (registerFailed) {
+        // removing it
         errorBox.remove()
+        // turning the flag variable back to false
         registerFailed = false
     }
 
-    if (!checkEmail()) {
+    // Checking if the inserted email is available
+    if (!checkEmail(inputs[0].value)) {
+        // Creating a fail message box with the text below
         failRegister("Este Email já está em uso")
+        // reseting the value of the email field
         inputs[0].value = ""
+        // focusing in email field to the user write another
         inputs[0].focus()
+        // returning this whole function, that is, not executing no more code from it
         return
     }
 
-    if (!checkCPF()) {
+    // Checking if the inserted cpf is available
+    if (!checkCPF(inputs[3].value)) {
         failRegister("Este CPF já está em uso")
         inputs[3].value = ""
         inputs[3].focus()
         return
     }
 
+    // Checking if the password and the confirmation password are equal
     if (!checkPassword()) {
         failRegister("As senhas digitadas são diferentes")
         inputs[8].value = ""
@@ -46,14 +76,20 @@ frm.addEventListener("submit", (e) => {
         return
     }
 
+    // variable to hold the gender selected by the user
     let gender;
+    // iterating for each option until find the gender selected
     for (let i = 0; i < genderInputs.length; i++) {
+        // if clause to check if genderInput[i] is selected
         if (genderInputs[i].checked) {
+            // storing gender selected in the variable
             gender = genderInputs[i].value
+            // leaving the for loop
             break
         }
     }
 
+    // constructing user object to store in local storage
     const registeredUser = {}
     registeredUser.email = inputs[0].value
     registeredUser.name = inputs[1].value
@@ -63,25 +99,37 @@ frm.addEventListener("submit", (e) => {
     registeredUser.birthdate = inputs[7].value
     registeredUser.password = inputs[8].value
 
+    // Updating users data, that is meant to stored all registered users, from local storage
+    // passing the string stored in local storage to javascript object
     const users = JSON.parse(localStorage.getItem("users"))
+    // Adding the new user in the object by putting a new attribute with the email the name/key
     users[inputs[0].value] = registeredUser
+    // updating the string stored in local storage stringifying the updated object
     localStorage.setItem("users", JSON.stringify(users))
 
+    // Updating used CPFs data, that is meant to stored all registered CPFs used by registered users, from local storage
     const usedCPFs = JSON.parse(localStorage.getItem("usedCPFs"))
     usedCPFs[inputs[3].value] = "USED"
     localStorage.setItem("usedCPFs", JSON.stringify(usedCPFs))
 
+    // Redirecting the user to login page
     window.location.href = "../public/login.html"
 
 })
 
+// function to check if the email is available by acessing the local storage data
 function checkEmail(userEmail) {
+    // passing the string stored in local storage to javascript object
     const users = JSON.parse(localStorage.getItem("users"))
+    // trying to retrieve the user owner of the email passed by parameter
     if (users[userEmail] == null)
+        // email is available
         return true
+    // email is not available
     return false
 }
 
+// function to check if the CPF is available by acessing the local storage data
 function checkCPF(cpf) {
     const usedCPFs = JSON.parse(localStorage.getItem("usedCPFs"))
     if (usedCPFs[cpf] == null)
@@ -89,25 +137,34 @@ function checkCPF(cpf) {
     return false
 }
 
+// function to check if the password and the confirmation password are equal
 const checkPassword = () => inputs[8].value == inputs[9].value
 
+// function to create a fail message box in user screen with the text passed by parameter
 const failRegister = (errMsg) => {
-    if (!registerFailed) {
-        const listItem = document.createElement("li")
-        const messageErrorBox = document.createElement("div")
-        const errorMessage = document.createTextNode(errMsg)
+    // creating a li html element
+    const listItem = document.createElement("li")
+    // creating a div html element
+    const messageErrorBox = document.createElement("div")
+    // creating a text node having error message passed by parameter
+    const errorMessage = document.createTextNode(errMsg)
 
-        messageErrorBox.appendChild(errorMessage)
-        messageErrorBox.style.backgroundColor = "rgba(255, 0, 0, 0.2)"
-        messageErrorBox.style.color = "red"
-        messageErrorBox.style.border = "1px solid red"
-        messageErrorBox.style.padding = "2px 5px"
+    // putting the error message inside the div html element
+    messageErrorBox.appendChild(errorMessage)
+    // stylying the div html element
+    messageErrorBox.style.backgroundColor = "rgba(255, 0, 0, 0.2)"
+    messageErrorBox.style.color = "red"
+    messageErrorBox.style.border = "1px solid red"
+    messageErrorBox.style.padding = "2px 5px"
 
-        listItem.appendChild(messageErrorBox)
+    // putting the div html element inside the li html element
+    listItem.appendChild(messageErrorBox)
 
-        document.querySelector("ul").appendChild(listItem)
+    // puting li html element inside the ul html element
+    document.querySelector("ul").appendChild(listItem)
 
-        registerFailed = true
-        errorBox = listItem
-    }
+    // Updating flag variable to true
+    registerFailed = true
+    // storing the reference to the fail message box to remove it later
+    errorBox = listItem
 }
