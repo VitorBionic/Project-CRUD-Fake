@@ -96,19 +96,21 @@ body#home main ul li:hover {
     background: #d6ae51;
 }
 
-/* Login, Register */
+/* Login, Register, Profile */
 
-body#login main form ul, body#register main form ul {
+body#login main form ul, body#register main form ul, body#profile main form ul {
     align-items: center;
     margin: 0 auto;
     margin-top: 15px;
 }
 
-body#login main form ul li input, body#register main form ul li input {
+body#login main form ul li input, body#register main form ul li input, body#profile main form ul li input {
     border-radius: 15px;
     height: 22px;
     padding: 0 8px;
 }
+
+/* Login, Register */
 
 body#login main form ul li#submit input, body#register main form ul li#submit input {
     height: 35px;
@@ -122,21 +124,21 @@ body#login main form ul li#submit input:hover, body#register main form ul li#sub
     background: #d6ae51;
 }
 
-/* Register */
+/* Register, Profile */
 
-body#register main form ul li#gender {
+body#register main form ul li#gender, body#profile main form ul li#gender {
     border: 1px solid purple;
     position: relative;
     right: 44px;
 }
 
-body#register main form ul li#birthdate {
+body#register main form ul li#birthdate, body#profile main form ul li#birthdate {
     border: 1px solid purple;
     position: relative;
     right: 20px;
 }
 
-body#register main form ul li#gender input {
+body#register main form ul li#gender input, body#profile main form ul li#gender input {
     height: 15px;
 }
 
@@ -179,3 +181,54 @@ body#mainpage main ul hr {
 body#mainpage main ul li#compliment p {
     font-size: 1.5rem;
 }
+
+/* Profile Page */
+body#profile main form ul li#logout input {
+    height: 35px;
+    font-size: 1rem;
+    background: #de332d;
+    cursor: pointer;
+    border-radius: 25px;
+    width: 125px;
+}
+
+body#profile main form ul li#logout input:hover {
+    background: #ab1b17;
+}
+
+body#profile main form ul li button {
+    border-radius: 15px;
+    height: 22px;
+    font-size: 1rem;
+    background: #f65920;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 50px;
+}
+
+body#profile main form ul li button:hover {
+    background: #b2441c;
+}
+
+body#profile main form ul li#gender {
+    right: 69px;
+}
+
+body#profile main form ul li#birthdate {
+    right: 25px;
+}
+
+/* Profile Page - Overlay */
+
+#overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 1;
+  }
