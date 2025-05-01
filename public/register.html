@@ -16,7 +16,7 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="../css/styles.css">
 
-    <link rel="icon" type="img/png" href="assets/img/favicon.png">
+    <link rel="icon" type="img/png" href="../assets/img/favicon.png">
     <title>Fake CRUD</title>
 </head>
 <body id="register">
@@ -43,7 +43,7 @@
                     <li>
                         <label for="inCPF">CPF:</label>
                         <br>
-                        <input type="text" id="inCPF" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="123.456.789-10" required>
+                        <input type="text" id="inCPF" placeholder="123.456.789-10" required>
                     </li>
                     <li id="gender">
                         <p>Gênero:</p>
@@ -65,7 +65,7 @@
                     <li>
                         <label for="inPassword">Senha:</label>
                         <br>
-                        <input type="password" id="inPassword" placeholder="Digite sua senha" maxlength="20" required>
+                        <input type="password" id="inPassword" placeholder="Digite sua senha" minlength="8" maxlength="20" required>
                     </li>
                     <li>
                         <label for="inPasswordConfirmation">Confirme sua senha:</label>

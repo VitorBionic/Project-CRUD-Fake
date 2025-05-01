@@ -31,7 +31,7 @@ frm.addEventListener("submit", (e) => {
     const users = JSON.parse(localStorage.getItem("users"))
 
     // trying to retrieve a user who is owner of the inserted email
-    const user = users[emailField.value]
+    const user = users[emailField.value.toLowerCase()]
 
     // if a user with this email is not registered or the password is wrong, the authentication will fail
     if (user == null || user.password != passwordField.value)

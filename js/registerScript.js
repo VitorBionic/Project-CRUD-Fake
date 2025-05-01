@@ -47,6 +47,9 @@ frm.addEventListener("submit", (e) => {
         registerFailed = false
     }
 
+    // turning email in lower case
+    inputs[0].value = inputs[0].value.toLowerCase()
+
     // Checking if the inserted email is available
     if (!checkEmail(inputs[0].value)) {
         // Creating a fail message box with the text below
@@ -59,8 +62,40 @@ frm.addEventListener("submit", (e) => {
         return
     }
 
-    // Checking if the inserted cpf is available
+    // removing the spaces around name
+    inputs[1].value = inputs[1].value.trim()
+    // removing the spaces around surname
+    inputs[2].value = inputs[2].value.trim()
+
+    // Checking if the inserted name is not empty
+    if (!checkName(inputs[1].value)) {
+        failRegister("Nome está vazio")
+        inputs[1].value = ""
+        inputs[1].focus()
+        return
+    }
+
+    // Checking if the inserted surname is not empty
+    if (!checkName(inputs[2].value)) {
+        failRegister("Sobrenome está vazio")
+        inputs[2].value = ""
+        inputs[2].focus()
+        return
+    }
+
+    // removing the spaces around cpf
+    inputs[3].value = inputs[3].value.trim()
+
+    // Checking if the inserted cpf has 11 numbers and formating it if needed
     if (!checkCPF(inputs[3].value)) {
+        failRegister("Este CPF é inválido")
+        inputs[3].value = ""
+        inputs[3].focus()
+        return
+    }
+
+    // Checking if the inserted cpf is available
+    if (!checkCPFAvailability(inputs[3].value)) {
         failRegister("Este CPF já está em uso")
         inputs[3].value = ""
         inputs[3].focus()
@@ -117,6 +152,9 @@ frm.addEventListener("submit", (e) => {
 
 })
 
+
+/* Function Definitions */
+
 // function to check if the email is available by acessing the local storage data
 function checkEmail(userEmail) {
     // passing the string stored in local storage to javascript object
@@ -130,12 +168,34 @@ function checkEmail(userEmail) {
 }
 
 // function to check if the CPF is available by acessing the local storage data
-function checkCPF(cpf) {
+function checkCPFAvailability(cpf) {
     const usedCPFs = JSON.parse(localStorage.getItem("usedCPFs"))
     if (usedCPFs[cpf] == null)
         return true
     return false
 }
+
+// function to check if the CPF has 11 numbers and formating it if needed
+function checkCPF(cpf) {
+    // checking if the in format: nnn.nnn.nnn-nn
+    if (cpf.match(/\d{3}\.\d{3}\.\d{3}-\d{2}/) != null) {
+        // checking length: 11 numbers + 2 dots + 1 hyphen
+        if (cpf.length == 14)
+            return true
+    // else, we assume the user inserted in the format: nnnnnnnnnnn
+    } else {
+        // checking if the cpf is a number without caracters other than numeric digits and its 11 numeric digits
+        if (!cpf.includes(".") && !Number.isNaN(cpf) && cpf.length == 11) {
+            // formating it
+            inputs[3].value = inputs[3].value.slice(0, 3) + "." + inputs[3].value.slice(3, 6) + "." + inputs[3].value.slice(6, 9) + "-" + inputs[3].value.slice(9)
+            return true
+        }
+    }
+    return false
+}
+
+// function just to check if the name is not empty after removing the spaces around it
+const checkName = (name) => name.length > 0
 
 // function to check if the password and the confirmation password are equal
 const checkPassword = () => inputs[8].value == inputs[9].value
