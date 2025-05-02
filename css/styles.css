@@ -218,7 +218,7 @@ body#profile main form ul li#birthdate {
     right: 25px;
 }
 
-/* Profile Page - Overlay */
+/* Profile Page, Mainpage - Overlay */
 
 #overlay {
     position: fixed;
@@ -231,4 +231,37 @@ body#profile main form ul li#birthdate {
     bottom: 0;
     background-color: rgba(0,0,0,0.5);
     z-index: 1;
-  }
+}
+
+#overlay div.container {
+    position: relative;
+    background: #feab53;
+    min-width: 300px;
+    width: 40%;
+}
+
+#overlay form ul li#submit input {
+    height: 35px;
+    font-size: 1rem;
+    background: #fbca57;
+    cursor: pointer;
+}
+#overlay form ul li#submit input:hover {
+    background: #d6ae51;
+}
+
+#overlay button#btClose {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 1.1rem;
+    background: #f65920;
+    cursor: pointer;
+    border-radius: 40px;
+    width: 35px;
+    height: 35px;
+}
+
+#overlay button#btClose:hover {
+    background: #b2441c;
+}

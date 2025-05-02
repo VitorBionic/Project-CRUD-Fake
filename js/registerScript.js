@@ -36,7 +36,7 @@ let errorBox
 // Adding event listener to event "submit" from form element
 // "submit" event is triggered when submit input button is pressed
 frm.addEventListener("submit", (e) => {
-    // preventing the behavior default from "submit" event
+    // preventing the default behavior from "submit" event
     e.preventDefault()
 
     // Checking if there's already a fail message box in the screen
@@ -47,8 +47,8 @@ frm.addEventListener("submit", (e) => {
         registerFailed = false
     }
 
-    // turning email in lower case
-    inputs[0].value = inputs[0].value.toLowerCase()
+    // turning email in lower case and removing spaces
+    inputs[0].value = inputs[0].value.toLowerCase().trim()
 
     // Checking if the inserted email is available
     if (!checkEmail(inputs[0].value)) {
