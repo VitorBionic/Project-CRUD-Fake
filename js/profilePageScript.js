@@ -1,5 +1,6 @@
 /* WARNING: This code became a lot more complex than I wanted it to be */
 
+// retrieving the logged user data parsing the string saved in local storage to a javascript object
 const currentUser = JSON.parse(localStorage.getItem("currentUser"))
 
 const inputs = document.getElementsByTagName("input")
@@ -16,11 +17,14 @@ inputs[8] = Password input
 inputs[9] = Logout Button input
 */
 
+/* Putting the logged user data in the input elements */
+
 inputs[0].value = currentUser.email
 inputs[1].value = currentUser.name
 inputs[2].value = currentUser.surname
 inputs[3].value = currentUser.cpf
 
+// loop for search the selected gender, going from inputs[4] until inputs[6] or until someone of these inputs is checked(selected)
 for (let i = 4; i < 7; i++) {
     if (inputs[i].value == currentUser.gender) {
         inputs[i].checked = true
@@ -30,15 +34,30 @@ for (let i = 4; i < 7; i++) {
 
 inputs[7].value = currentUser.birthdate
 
-const changeButtons = document.getElementsByTagName("button")
 
+/* Setting up the change buttons */
+
+const changeButtons = document.querySelector("ul").getElementsByTagName("button")
+/*
+changeButtons[0] = btChangeEmail
+changeButtons[1] = btChangeName
+changeButtons[2] = btChangeSurname
+changeButtons[3] = btChangeCPF
+changeButtons[4] = btChangeGender
+changeButtons[5] = btChangeBirthDate
+changeButtons[6] = btChangePassword
+*/
+
+// Getting the overlay layer element
 const overlay = document.querySelector("#overlay")
 
+// Iterating for each change button to add a event listener to event "click" in it, that will run a function which will construct overlay layer based on the id of the change button
 for (const bt of changeButtons) {
     bt.addEventListener("click", (e) => {
         e.preventDefault()
         overlay.style.display = "flex"
 
+        // Checking the id of the current button to decide how create thee overlay layer using the 'constructFieldChange' function
         switch (bt.id) {
             case "btChangeEmail":
                 constructFieldChange("email", "email", "email", "50")
@@ -112,6 +131,7 @@ const constructFieldChange = (field, fieldTitle, fieldType, maxlength, minlength
         input.setAttribute("required", "");
         li.appendChild(input)
     } else {
+        li.setAttribute("id", "new" + fieldWithFirstLetterInUpperCase)
         const p = document.createElement("p")
         const pText = document.createTextNode(`Novo ${fieldTitle}:`)
         p.appendChild(pText)
@@ -201,7 +221,6 @@ const constructFieldChange = (field, fieldTitle, fieldType, maxlength, minlength
             }
         }
 
-        alert("field: " + input.value)
         switch (field) {
             case "email":
                 if (!checkEmail(input.value)) {
@@ -273,7 +292,10 @@ const constructFieldChange = (field, fieldTitle, fieldType, maxlength, minlength
 }
 
 /* Descontruct OverLay */
+
+// Adding a event listener to event "click" in the overlay close button
 overlay.querySelector("button#btClose").addEventListener("click", () => {
+    // removing all constructed elements stored in the array constructedElements
     for (const element of constructedElements) {
         element.remove()
     }
@@ -286,13 +308,16 @@ overlay.querySelector("button#btClose").addEventListener("click", () => {
         updateFailed = false
     }
 
+    // removing event listener to event "submit" from form element
     overlay.querySelector("form").removeEventListener("submit", submitEventListenerFunction)
 })
 
 /* Function Logout */
 
 function logout() {
+    // removing data of the logged user from local storage
     localStorage.removeItem("currentUser");
+    // redirecting to home page
     window.location.replace("../index.html")
 }
 

@@ -218,6 +218,10 @@ body#profile main form ul li#birthdate {
     right: 25px;
 }
 
+body#profile #overlay form ul li#newGender input {
+    height: 15px;
+}
+
 /* Profile Page, Mainpage - Overlay */
 
 #overlay {
