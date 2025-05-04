@@ -1,3 +1,5 @@
+/* WARNING: This code became a lot more complex than I wanted it to be */
+
 const currentUser = JSON.parse(localStorage.getItem("currentUser"))
 
 const inputs = document.getElementsByTagName("input")
@@ -37,51 +39,141 @@ for (const bt of changeButtons) {
         e.preventDefault()
         overlay.style.display = "flex"
 
-        const btId = bt.id
-        switch (btId) {
+        switch (bt.id) {
             case "btChangeEmail":
-                constructEmailChange()
+                constructFieldChange("email", "email", "email", "50")
+                break;
+            case "btChangeName":
+                constructFieldChange("name", "nome", "text", "20")
+                break;
+            case "btChangeSurname":
+                constructFieldChange("surname", "sobrenome", "text", "40")
+                break;
+            case "btChangeCPF":
+                constructFieldChange("cpf", "cpf", "text")
+                break;
+            case "btChangeGender":
+                constructFieldChange("gender", "gênero", "radio", null, null, ["male", "female", "nonbinary"], ["Masculino", "Feminino", "Não Binário"])
+                break;
+            case "btChangeBirthDate":
+                constructFieldChange("birthdate", "data de nascimento", "date")
+                break;
+            case "btChangePassword":
+                constructFieldChange("password", "senha", "password", "20", "8")
                 break;
         }
     })
 }
+
+/* Field Change Construct Functions */
 
 // flag variable to manage the fail message box
 let updateFailed = false
 // variable to hold the reference of the fail message box to remove it later
 let errorBox
 
-/* Field Change Construct Functions */
-
 const constructedElements = []
 let submitEventListenerFunction
 
-const constructEmailChange = () => {
-    overlay.querySelector("h1").innerText = "Alterar Email"
+const constructFieldChange = (field, fieldTitle, fieldType, maxlength, minlength, radioOptions, radioOptionsTitle) => {
+    let fieldWithFirstLetterInUpperCase = field.charAt(0).toUpperCase() + field.slice(1)
+    let fieldTitleWithFirstLetterInUpperCase = fieldTitle.charAt(0).toUpperCase() + fieldTitle.slice(1)
+    if (field == "cpf") {
+        fieldWithFirstLetterInUpperCase = "CPF"
+        fieldTitleWithFirstLetterInUpperCase = fieldWithFirstLetterInUpperCase
+    }
+
+    overlay.querySelector("h1").innerText = "Alterar " + fieldTitleWithFirstLetterInUpperCase
     const ul = overlay.querySelector("ul")
 
-    const li = document.createElement("li")
+    let li = document.createElement("li")
+    let input
 
-    const label = document.createElement("label")
-    label.setAttribute("for", "inNewEmail")
-    label.innerText = "Novo Email: "
-    li.appendChild(label)
+    if (fieldType != "radio") {
+        const label = document.createElement("label")
+        label.setAttribute("for", "inNew" + fieldWithFirstLetterInUpperCase)
+        label.innerText = field != "password" && field != "birthdate" ? `Novo ${fieldTitle}: ` : `Nova ${fieldTitle}: `
+        li.appendChild(label)
 
-    const br = document.createElement("br")
-    li.appendChild(br)
+        const br = document.createElement("br")
+        li.appendChild(br)
 
-    const input = document.createElement("input")
-    input.setAttribute("type", "email")
-    input.setAttribute("id", "inNewEmail")
-    input.setAttribute("maxlength", "50")
-    input.setAttribute("placeholder", "Digite seu novo email")
-    input.setAttribute("required", "");
-    li.appendChild(input)
+        input = document.createElement("input")
+        input.setAttribute("type", fieldType)
+        input.setAttribute("id", "inNew" + fieldWithFirstLetterInUpperCase)
+        if (maxlength != null)
+            input.setAttribute("maxlength", maxlength)
+        if (minlength != null)
+            input.setAttribute("minlength", minlength)
+        if (fieldType != "date") {
+            let template = fieldType != "password" ? "Digite seu novo " : "Digite sua nova "
+            input.setAttribute("placeholder", template + fieldTitle)
+        }
+        input.setAttribute("required", "");
+        li.appendChild(input)
+    } else {
+        const p = document.createElement("p")
+        const pText = document.createTextNode(`Novo ${fieldTitle}:`)
+        p.appendChild(pText)
+        li.appendChild(p)
+
+        input = []
+        for (let i = 0; i < radioOptions.length; i++) {
+            if (i > 0) {
+                const br = document.createElement("br")
+                li.appendChild(br)
+            }
+            const newInput = document.createElement("input")
+            newInput.setAttribute("type", "radio")
+            newInput.setAttribute("id", "new" + radioOptions[i])
+            newInput.setAttribute("name", "inNew" + fieldWithFirstLetterInUpperCase)
+            newInput.setAttribute("value", radioOptions[i])
+            if (i == 0)
+                newInput.setAttribute("required", "")
+
+            input.push(newInput)
+            li.appendChild(newInput)
+
+            const label = document.createElement("label")
+            label.setAttribute("for", "new" + radioOptions[i])
+            label.innerText = radioOptionsTitle[i]
+
+            li.appendChild(label)
+        }
+    }
 
     constructedElements.push(li)
 
     const liSubmit = ul.querySelector("li#submit")
     ul.insertBefore(li, liSubmit)
+
+    let confirmInput;
+    if (fieldType == "password") {
+        li = document.createElement("li")
+
+        const label = document.createElement("label")
+        label.setAttribute("for", "inNew" + fieldWithFirstLetterInUpperCase) + "Confirmation"
+        label.innerText = `Confirmação da ${fieldTitle}: `
+        li.appendChild(label)
+
+        const br = document.createElement("br")
+        li.appendChild(br)
+
+        confirmInput = document.createElement("input")
+        confirmInput.setAttribute("type", fieldType)
+        confirmInput.setAttribute("id", "inNew" + fieldWithFirstLetterInUpperCase + "Confirmation")
+        if (maxlength != null)
+            confirmInput.setAttribute("maxlength", maxlength)
+        if (minlength != null)
+            confirmInput.setAttribute("minlength", minlength)
+        confirmInput.setAttribute("placeholder", "Confirme sua " + fieldTitle)
+        confirmInput.setAttribute("required", "");
+        li.appendChild(confirmInput)
+
+        constructedElements.push(li)
+
+        ul.insertBefore(li, liSubmit)
+    }
 
     const frm = overlay.querySelector("form")
 
@@ -94,28 +186,82 @@ const constructEmailChange = () => {
             // removing it
             errorBox.remove()
             // turning the flag variable back to false
-            registerFailed = false
+            updateFailed = false
         }
 
-        // turning email in lower case and removing spaces
-        input.value = input.value.toLowerCase().trim()
+        if (fieldType != "radio") {
+            input.value = input.value.trim()
+            input.value = fieldType == "email" ? input.value.toLowerCase() : input.value
+        } else {
+            for (const inpt of input) {
+                if (inpt.checked) {
+                    input = inpt
+                    break;
+                }
+            }
+        }
 
-        // Checking if the inserted email is available
-        console.log(input.value)
-        if (!checkEmail(input.value)) {
-            // Creating a fail message box with the text below
-            failUpdate("Este Email já está em uso")
-            // reseting the value of the email field
-            input.value = ""
-            // focusing in email field to the user write another
-            input.focus()
-            // returning this whole function, that is, not executing no more code from it
-            return
+        alert("field: " + input.value)
+        switch (field) {
+            case "email":
+                if (!checkEmail(input.value)) {
+                    failUpdate("Este Email já está em uso")
+                    input.value = ""
+                    input.focus()
+                    return
+                }
+                break
+            case "name":
+                if (!checkName(input.value)) {
+                    failUpdate("Nome está vazio")
+                    input.value = ""
+                    input.focus()
+                    return
+                }
+                break
+            case "surname":
+                if (!checkName(input.value)) {
+                    failUpdate("Sobrenome está vazio")
+                    input.value = ""
+                    input.focus()
+                    return
+                }
+                break
+            case "cpf":
+                if (!checkCPF(input)) {
+                    failUpdate("Este CPF é inválido")
+                    input.value = ""
+                    input.focus()
+                    return
+                }
+                if (!checkCPFAvailability(input.value)) {
+                    failUpdate("Este CPF já está em uso")
+                    input.value = ""
+                    input.focus()
+                    return
+                }
+                break
+            case "password":
+                if (!checkPassword(input.value, confirmInput.value)) {
+                    failUpdate("As senhas digitadas são diferentes")
+                    input.value = ""
+                    confirmInput.value = ""
+                    input.focus()
+                    return
+                }
+                break
         }
         const users = JSON.parse(localStorage.getItem("users"))
         delete users[currentUser.email]
 
-        currentUser.email = input.value
+        if (field == "cpf") {
+            const usedCPFs = JSON.parse(localStorage.getItem("usedCPFs"))
+            delete usedCPFs[currentUser[field]]
+            usedCPFs[input.value] = "USED"
+            localStorage.setItem("usedCPFs", JSON.stringify(usedCPFs))
+        }
+
+        currentUser[field] = input.value
         users[currentUser.email] = currentUser
         localStorage.setItem("currentUser", JSON.stringify(currentUser))
         localStorage.setItem("users", JSON.stringify(users))
@@ -132,7 +278,15 @@ overlay.querySelector("button#btClose").addEventListener("click", () => {
         element.remove()
     }
 
-    overlay.querySelector("form").removeEventListener("click", submitEventListenerFunction)
+    // Checking if there's still a fail message box in the screen
+    if (updateFailed) {
+        // removing it
+        errorBox.remove()
+        // turning the flag variable back to false
+        updateFailed = false
+    }
+
+    overlay.querySelector("form").removeEventListener("submit", submitEventListenerFunction)
 })
 
 /* Function Logout */
@@ -167,7 +321,9 @@ function checkCPFAvailability(cpf) {
 }
 
 // function to check if the CPF has 11 numbers and formating it if needed
-function checkCPF(cpf) {
+function checkCPF(input) {
+    // Getting cpf from the input
+    const cpf = input.value
     // checking if the in format: nnn.nnn.nnn-nn
     if (cpf.match(/\d{3}\.\d{3}\.\d{3}-\d{2}/) != null) {
         // checking length: 11 numbers + 2 dots + 1 hyphen
@@ -178,7 +334,7 @@ function checkCPF(cpf) {
         // checking if the cpf is a number without caracters other than numeric digits and its 11 numeric digits
         if (!cpf.includes(".") && !Number.isNaN(cpf) && cpf.length == 11) {
             // formating it
-            inputs[3].value = inputs[3].value.slice(0, 3) + "." + inputs[3].value.slice(3, 6) + "." + inputs[3].value.slice(6, 9) + "-" + inputs[3].value.slice(9)
+            input.value = input.value.slice(0, 3) + "." + input.value.slice(3, 6) + "." + input.value.slice(6, 9) + "-" + input.value.slice(9)
             return true
         }
     }
