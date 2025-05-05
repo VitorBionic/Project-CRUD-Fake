@@ -199,6 +199,9 @@ body#profile #overlay form ul li#newGender input {
 
 #overlay div.container {
     position: relative;
+    box-sizing: border-box;
+    padding-right: 50px;
+    padding-left: 50px;
     background: #feab53;
     min-width: 300px;
     width: 40%;
@@ -238,9 +241,7 @@ body#mainpage .container {
 }
 
 body#mainpage main ul {
-    text-align: center;
-    overflow: auto;
-    display: block;
+    align-items: center;
     margin: 0 auto;
     margin-top: 15px;
 }
@@ -264,7 +265,7 @@ body#mainpage main ul li#profile button i {
 body#mainpage main ul hr {
     height: 1px;
     background-color: black;
-    margin: 20px auto;
+    margin: 0 auto;
     width: 90%;
     border: none;
 }
@@ -275,6 +276,15 @@ body#mainpage main ul li#compliment p {
 
 body#mainpage table {
     border-collapse: collapse;
+}
+
+body#mainpage li#table {
+    width: 100%;
+    overflow: auto;
+}
+
+body#mainpage li#table table {
+    margin: 0 auto;
 }
 
 body#mainpage table th, body#mainpage td {
@@ -288,13 +298,13 @@ body#mainpage table tr:nth-child(even) {
     background-color: #f65920;
 }
 
-body#mainpage td.tdDel {
+body#mainpage table td.tdDel {
     border: none;
     background-color: #feab53;
     padding: 8px;
 }
 
-body#mainpage td.tdDel button.delete {
+body#mainpage table td.tdDel button.delete {
     height: 32px;
     font-size: 1.2rem;
     background: #de332d;
@@ -303,11 +313,11 @@ body#mainpage td.tdDel button.delete {
     width: 32px
 }
 
-body#mainpage td.tdDel button.delete:hover {
+body#mainpage table td.tdDel button.delete:hover {
     background: #ab1b17;
 }
 
-body#mainpage td button.edit {
+body#mainpage table td button.edit {
     position: absolute;
     right: 0px;
     top: 30%;
@@ -319,8 +329,57 @@ body#mainpage td button.edit {
     width: 26px;
 }
 
-body#mainpage td button.edit:hover {
+body#mainpage table td button.edit:hover {
     background: #d6ae51;
 }
+
+body#mainpage li#options {
+    background-color: #f65920;
+    border-radius: 15px;
+    padding: 12px;
+}
+
+body#mainpage li#options button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 26px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 30px;
+    padding: 8px;
+}
+
+body#mainpage li#options button i {
+    margin-right: 2px;
+}
+
+body#mainpage li#options button#btAdd {
+    background-color: #a3d62e;
+}
+
+body#mainpage li#options button#btAdd:hover {
+    background-color: #93c129;
+}
+
+body#mainpage #overlay div.container {
+    min-width: 300px;
+    width: 40%;
+}
+
+body#mainpage #overlay form ul li input {
+    border-radius: 15px;
+    height: 22px;
+    padding: 0 8px;
+}
+
+body#mainpage #overlay form ul li#submit input {
+    height: 35px;
+}
+
+body#mainpage #overlay form ul li#newGender input {
+    height: 15px;
+}
+
 
 
