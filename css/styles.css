@@ -142,46 +142,6 @@ body#register main form ul li#gender input, body#profile main form ul li#gender 
     height: 15px;
 }
 
-/* Mainpage */
-
-body#mainpage .container {
-    min-width: 400px;
-    width: 80%;
-}
-
-body#mainpage main ul {
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 15px;
-}
-
-body#mainpage main ul li#profile button {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    background: #fbca57;
-    cursor: pointer;
-}
-
-body#mainpage main ul li#profile button:hover {
-    background: #d6ae51;
-}
-
-body#mainpage main ul li#profile button i {
-    font-size: 3rem;
-}
-
-body#mainpage main ul hr {
-    height: 1px;
-    background-color: black;
-    width: 90%;
-    border: none
-}
-
-body#mainpage main ul li#compliment p {
-    font-size: 1.5rem;
-}
-
 /* Profile Page */
 body#profile main form ul li#logout input {
     height: 35px;
@@ -269,3 +229,98 @@ body#profile #overlay form ul li#newGender input {
 #overlay button#btClose:hover {
     background: #b2441c;
 }
+
+/* Mainpage */
+
+body#mainpage .container {
+    min-width: 400px;
+    width: 80%;
+}
+
+body#mainpage main ul {
+    text-align: center;
+    overflow: auto;
+    display: block;
+    margin: 0 auto;
+    margin-top: 15px;
+}
+
+body#mainpage main ul li#profile button {
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    background: #fbca57;
+    cursor: pointer;
+}
+
+body#mainpage main ul li#profile button:hover {
+    background: #d6ae51;
+}
+
+body#mainpage main ul li#profile button i {
+    font-size: 3rem;
+}
+
+body#mainpage main ul hr {
+    height: 1px;
+    background-color: black;
+    margin: 20px auto;
+    width: 90%;
+    border: none;
+}
+
+body#mainpage main ul li#compliment p {
+    font-size: 1.5rem;
+}
+
+body#mainpage table {
+    border-collapse: collapse;
+}
+
+body#mainpage table th, body#mainpage td {
+    text-align: left;
+    position: relative;
+    border: 1px solid #f65920;
+    padding: 8px 30px 8px 8px;
+}
+
+body#mainpage table tr:nth-child(even) {
+    background-color: #f65920;
+}
+
+body#mainpage td.tdDel {
+    border: none;
+    background-color: #feab53;
+    padding: 8px;
+}
+
+body#mainpage td.tdDel button.delete {
+    height: 32px;
+    font-size: 1.2rem;
+    background: #de332d;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 32px
+}
+
+body#mainpage td.tdDel button.delete:hover {
+    background: #ab1b17;
+}
+
+body#mainpage td button.edit {
+    position: absolute;
+    right: 0px;
+    top: 30%;
+    height: 26px;
+    font-size: 1rem;
+    background: #fbca57;
+    cursor: pointer;
+    border-radius: 10px;
+    width: 26px;
+}
+
+body#mainpage td button.edit:hover {
+    background: #d6ae51;
+}
+
+
