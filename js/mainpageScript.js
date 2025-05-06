@@ -356,7 +356,7 @@ function constructNewRegistryInput() {
     const brEmail = document.createElement("br")
     liEmail.appendChild(brEmail)
     const inputEmail = document.createElement("input")
-    inputEmail.setAttribute("type", "text")
+    inputEmail.setAttribute("type", "email")
     inputEmail.setAttribute("id", "inEmail")
     inputEmail.setAttribute("maxlength", "50")
     inputEmail.setAttribute("placeholder", "Digite o email")
