@@ -36,7 +36,6 @@ body .container {
 
 body main {
     background: #feab53;
-    border: 1px solid blueviolet;
 }
 
 body main h1 {
@@ -54,7 +53,6 @@ body main ul {
 
 body main ul li a {
     box-sizing: border-box;
-    border: 1px solid blueviolet;
     display: block;
     height: 100%;
     padding: 5px;
@@ -88,7 +86,6 @@ body#home main ul li {
     background: #fbca57;
     border-radius: 30px;
     cursor: pointer;
-    border: 1px solid greenyellow;
     text-align: center;
 }
 
@@ -124,21 +121,19 @@ body#login main form ul li#submit input:hover, body#register main form ul li#sub
     background: #d6ae51;
 }
 
-/* Register, Profile */
+/* Register, Profile, Mainpage - Overlay */
 
-body#register main form ul li#gender, body#profile main form ul li#gender {
-    border: 1px solid purple;
+body#register main form ul li#gender, body#profile main form ul li#gender, body#mainpage #overlay form ul li#gender {
     position: relative;
     right: 44px;
 }
 
-body#register main form ul li#birthdate, body#profile main form ul li#birthdate {
-    border: 1px solid purple;
+body#register main form ul li#birthdate, body#profile main form ul li#birthdate, body#mainpage #overlay form ul li#birthdate {
     position: relative;
     right: 20px;
 }
 
-body#register main form ul li#gender input, body#profile main form ul li#gender input {
+body#register main form ul li#gender input, body#profile main form ul li#gender input, body#mainpage #overlay form ul li#gender input {
     height: 15px;
 }
 

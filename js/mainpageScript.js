@@ -13,14 +13,19 @@ for (const userEmail of Object.keys(users)) {
     createRegistry(userEmail);
 }
 
+const addBtn = document.getElementById("btAdd")
 const deleteBtns = document.getElementsByClassName("delete")
 const editBtns = document.getElementsByClassName("edit")
-const addBtn = document.getElementById("btAdd")
 
 const overlay = document.getElementById("overlay")
 
 let textNode
 const constructedElements = []
+
+addBtn.addEventListener("click", () => {
+    overlay.style.display = "flex"
+    constructNewRegistryInput()
+})
 
 for (const btn of deleteBtns) {
     btn.addEventListener("click", () => {
@@ -137,7 +142,7 @@ const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength
         if (minlength != null)
             input.setAttribute("minlength", minlength)
         if (fieldType != "date") {
-            let template = fieldType != "password" ? "Digite seu novo " : "Digite sua nova "
+            let template = fieldType != "password" ? "Digite o novo " : "Digite a nova "
             input.setAttribute("placeholder", template + fieldTitle)
         }
         input.setAttribute("required", "");
@@ -332,7 +337,299 @@ overlay.querySelector("button#btClose").addEventListener("click", () => {
         updateFailed = false
     }
 
+    // removing event listener to event "submit" from form element
+    overlay.querySelector("form").removeEventListener("submit", submitEventListenerFunction)
 })
+
+function constructNewRegistryInput() {
+    const ul = overlay.querySelector("ul")
+
+    textNode = document.createTextNode("Adicionar Novo Registro")
+    overlay.querySelector("h1").appendChild(textNode)
+
+    const liEmail = document.createElement("li")
+    const labelEmail = document.createElement("label")
+    labelEmail.setAttribute("for", "inEmail")
+    const textEmail = document.createTextNode("Email:")
+    labelEmail.appendChild(textEmail)
+    liEmail.appendChild(labelEmail)
+    const brEmail = document.createElement("br")
+    liEmail.appendChild(brEmail)
+    const inputEmail = document.createElement("input")
+    inputEmail.setAttribute("type", "text")
+    inputEmail.setAttribute("id", "inEmail")
+    inputEmail.setAttribute("maxlength", "50")
+    inputEmail.setAttribute("placeholder", "Digite o email")
+    inputEmail.setAttribute("required", "")
+    liEmail.appendChild(inputEmail)
+    constructedElements.push(liEmail)
+    ul.appendChild(liEmail)
+
+    const liName = document.createElement("li")
+    const labelName = document.createElement("label")
+    labelName.setAttribute("for", "inName")
+    const textName = document.createTextNode("Nome:")
+    labelName.appendChild(textName)
+    liName.appendChild(labelName)
+    const brName = document.createElement("br")
+    liName.appendChild(brName)
+    const inputName = document.createElement("input")
+    inputName.setAttribute("type", "text")
+    inputName.setAttribute("id", "inName")
+    inputName.setAttribute("maxlength", "20")
+    inputName.setAttribute("placeholder", "Digite o nome")
+    inputName.setAttribute("required", "")
+    liName.appendChild(inputName)
+    constructedElements.push(liName)
+    ul.appendChild(liName)
+
+    const liSurname = document.createElement("li")
+    const labelSurname = document.createElement("label")
+    labelSurname.setAttribute("for", "inSurname")
+    const textSurname = document.createTextNode("Sobrenome:")
+    labelSurname.appendChild(textSurname)
+    liSurname.appendChild(labelSurname)
+    const brSurname = document.createElement("br")
+    liSurname.appendChild(brSurname)
+    const inputSurname = document.createElement("input")
+    inputSurname.setAttribute("type", "text")
+    inputSurname.setAttribute("id", "inSurname")
+    inputSurname.setAttribute("maxlength", "40")
+    inputSurname.setAttribute("placeholder", "Digite o sobrenome")
+    inputSurname.setAttribute("required", "")
+    liSurname.appendChild(inputSurname)
+    constructedElements.push(liSurname)
+    ul.appendChild(liSurname)
+
+    const liCPF = document.createElement("li")
+    const labelCPF = document.createElement("label")
+    labelCPF.setAttribute("for", "inCPF")
+    const textCPF = document.createTextNode("CPF:")
+    labelCPF.appendChild(textCPF)
+    liCPF.appendChild(labelCPF)
+    const brCPF = document.createElement("br")
+    liCPF.appendChild(brCPF)
+    const inputCPF = document.createElement("input")
+    inputCPF.setAttribute("type", "text")
+    inputCPF.setAttribute("id", "inCPF")
+    inputCPF.setAttribute("placeholder", "123.456.789-10")
+    inputCPF.setAttribute("required", "")
+    liCPF.appendChild(inputCPF)
+    constructedElements.push(liCPF)
+    ul.appendChild(liCPF)
+
+    const liGender = document.createElement("li")
+    liGender.setAttribute("id", "gender")
+    const pGender = document.createElement("p")
+    const textGender = document.createTextNode("Gênero:")
+    pGender.appendChild(textGender)
+    liGender.appendChild(pGender)
+    const genderOptions = [
+        { id: "male", value: "male", label: "Masculino" },
+        { id: "female", value: "female", label: "Feminino" },
+        { id: "nonbinary", value: "nonbinary", label: "Não Binário" }
+    ]
+    genderOptions.forEach((option, index) => {
+        const input = document.createElement("input")
+        input.setAttribute("type", "radio")
+        input.setAttribute("id", option.id)
+        input.setAttribute("name", "inGender")
+        input.setAttribute("value", option.value)
+        if (index === 0)
+            input.setAttribute("required", "");
+
+        const label = document.createElement("label")
+        label.setAttribute("for", option.id)
+        const text = document.createTextNode(option.label)
+        label.appendChild(text)
+
+        liGender.appendChild(input)
+        liGender.appendChild(label)
+        const br = document.createElement("br")
+        liGender.appendChild(br)
+    });
+    constructedElements.push(liGender)
+    ul.appendChild(liGender)
+
+    const liBirth = document.createElement("li")
+    liBirth.setAttribute("id", "birthdate")
+    const labelBirth = document.createElement("label")
+    labelBirth.setAttribute("for", "inBirthDate")
+    const textBirth = document.createTextNode("Data de Nascimento:")
+    labelBirth.appendChild(textBirth)
+    liBirth.appendChild(labelBirth)
+    const brBirth = document.createElement("br")
+    liBirth.appendChild(brBirth);
+    const inputBirth = document.createElement("input")
+    inputBirth.setAttribute("type", "date")
+    inputBirth.setAttribute("id", "inBirthDate")
+    inputBirth.setAttribute("required", "")
+    liBirth.appendChild(inputBirth)
+    constructedElements.push(liBirth)
+    ul.appendChild(liBirth)
+
+    const liPassword = document.createElement("li")
+    const labelPassword = document.createElement("label")
+    labelPassword.setAttribute("for", "inPassword")
+    const textPassword = document.createTextNode("Senha:")
+    labelPassword.appendChild(textPassword)
+    liPassword.appendChild(labelPassword)
+    const brPassword = document.createElement("br")
+    liPassword.appendChild(brPassword)
+    const inputPassword = document.createElement("input")
+    inputPassword.setAttribute("type", "password")
+    inputPassword.setAttribute("id", "inPassword")
+    inputPassword.setAttribute("placeholder", "Digite a senha")
+    inputPassword.setAttribute("minlength", "8")
+    inputPassword.setAttribute("maxlength", "20")
+    inputPassword.setAttribute("required", "")
+    liPassword.appendChild(inputPassword)
+    constructedElements.push(liPassword);
+    ul.appendChild(liPassword)
+
+    const liConfirm = document.createElement("li")
+    const labelConfirm = document.createElement("label")
+    labelConfirm.setAttribute("for", "inPasswordConfirmation")
+    const textConfirm = document.createTextNode("Confirme a senha:")
+    labelConfirm.appendChild(textConfirm)
+    liConfirm.appendChild(labelConfirm)
+    const brConfirm = document.createElement("br")
+    liConfirm.appendChild(brConfirm)
+    const inputConfirm = document.createElement("input")
+    inputConfirm.setAttribute("type", "password")
+    inputConfirm.setAttribute("id", "inPasswordConfirmation")
+    inputConfirm.setAttribute("placeholder", "Digite a senha novamente")
+    inputConfirm.setAttribute("minlength", "8")
+    inputConfirm.setAttribute("maxlength", "20")
+    inputConfirm.setAttribute("required", "")
+    liConfirm.appendChild(inputConfirm)
+    constructedElements.push(liConfirm)
+    ul.appendChild(liConfirm)
+
+    const liSubmit = document.createElement("li")
+    liSubmit.setAttribute("id", "submit")
+    const inputSubmit = document.createElement("input")
+    inputSubmit.setAttribute("type", "submit")
+    inputSubmit.setAttribute("value", "Adicionar")
+    liSubmit.appendChild(inputSubmit)
+    constructedElements.push(liSubmit)
+    ul.appendChild(liSubmit)
+
+    const genderInputs = document.getElementsByName("inGender")
+    const inputs = overlay.getElementsByTagName("input")
+
+    submitEventListenerFunction = (e) => {
+        // preventing the default behavior from "submit" event
+        e.preventDefault()
+
+        // Checking if there's already a fail message box in the screen
+        if (updateFailed) {
+            // removing it
+            errorBox.remove()
+            // turning the flag variable back to false
+            updateFailed = false
+        }
+
+        // turning email in lower case and removing spaces
+        inputs[0].value = inputs[0].value.toLowerCase().trim()
+
+        // Checking if the inserted email is available
+        if (!checkEmail(inputs[0].value)) {
+            // Creating a fail message box with the text below
+            failUpdate("Este Email já está em uso")
+            // reseting the value of the email field
+            inputs[0].value = ""
+            // focusing in email field to the user write another
+            inputs[0].focus()
+            // returning this whole function, that is, not executing no more code from it
+            return
+        }
+
+        // removing the spaces around name
+        inputs[1].value = inputs[1].value.trim()
+        // removing the spaces around surname
+        inputs[2].value = inputs[2].value.trim()
+
+        // Checking if the inserted name is not empty
+        if (!checkName(inputs[1].value)) {
+            failUpdate("Nome está vazio")
+            inputs[1].value = ""
+            inputs[1].focus()
+            return
+        }
+
+        // Checking if the inserted surname is not empty
+        if (!checkName(inputs[2].value)) {
+            failUpdate("Sobrenome está vazio")
+            inputs[2].value = ""
+            inputs[2].focus()
+            return
+        }
+
+        // removing the spaces around cpf
+        inputs[3].value = inputs[3].value.trim()
+
+        // Checking if the inserted cpf has 11 numbers and formating it if needed
+        if (!checkCPF(inputs[3])) {
+            failUpdate("Este CPF é inválido")
+            inputs[3].value = ""
+            inputs[3].focus()
+            return
+        }
+
+        // Checking if the inserted cpf is available
+        if (!checkCPFAvailability(inputs[3].value)) {
+            failUpdate("Este CPF já está em uso")
+            inputs[3].value = ""
+            inputs[3].focus()
+            return
+        }
+
+        // Checking if the password and the confirmation password are equal
+        if (!checkPassword(inputs[8].value, inputs[9].value)) {
+            failUpdate("As senhas digitadas são diferentes")
+            inputs[8].value = ""
+            inputs[9].value = ""
+            inputs[8].focus()
+            return
+        }
+
+        // variable to hold the gender selected by the user
+        let gender;
+        // iterating for each option until find the gender selected
+        for (let i = 0; i < genderInputs.length; i++) {
+            // if clause to check if genderInput[i] is selected
+            if (genderInputs[i].checked) {
+                // storing gender selected in the variable
+                gender = genderInputs[i].value
+                // leaving the for loop
+                break
+            }
+        }
+
+        // constructing user object to store in local storage
+        const registeredUser = {}
+        registeredUser.email = inputs[0].value
+        registeredUser.name = inputs[1].value
+        registeredUser.surname = inputs[2].value
+        registeredUser.cpf = inputs[3].value
+        registeredUser.gender = gender
+        registeredUser.birthdate = inputs[7].value
+        registeredUser.password = inputs[8].value
+
+        users[inputs[0].value] = registeredUser
+        // updating the string stored in local storage stringifying the updated object
+        localStorage.setItem("users", JSON.stringify(users))
+
+        usedCPFs[inputs[3].value] = "USED"
+        localStorage.setItem("usedCPFs", JSON.stringify(usedCPFs))
+        
+        window.location.reload()
+
+    }
+
+    overlay.querySelector("form").addEventListener("submit", submitEventListenerFunction)
+}
 
 function createRegistry(email) {
     const user = users[email]
@@ -423,9 +720,6 @@ function createRegistry(email) {
     tableData8.appendChild(deleteButton)
     tableRow.appendChild(tableData8)
     
-
-
-
     table.appendChild(tableRow)
 }
 
