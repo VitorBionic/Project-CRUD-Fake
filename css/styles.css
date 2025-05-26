@@ -141,33 +141,14 @@ body#register main form ul li#gender input, body#profile main form ul li#gender 
 body#profile main form ul li#logout input {
     height: 35px;
     font-size: 1rem;
-    background: #de2d2d;
+    background: #de332d;
     cursor: pointer;
     border-radius: 25px;
     width: 125px;
 }
 
 body#profile main form ul li#logout input:hover {
-    background: #de2d2d;
-}
-
-body#profile main form ul li#salvarAlteracoes input {
-    height: 35px;
-    font-size: 1rem;
-    background: #42de2d;
-    cursor: pointer;
-    border-radius: 25px;
-    width: 125px;
-}
-
-body#profile main form ul li#salvarAlteracoes input:hover {
-    background: #42de2d;
-}
-
-.botoes-container {
-    display: flex;
-    gap: 15px; /* espaçamento entre os botões */
-    margin-top: 20px;
+    background: #ab1b17;
 }
 
 body#profile main form ul li button {

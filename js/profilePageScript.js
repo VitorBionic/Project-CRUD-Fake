@@ -321,22 +321,6 @@ function logout() {
     window.location.replace("../index.html")
 }
 
-    // um botão de salvar todas as alterações ao lado do botão 'logout' 
-function salvarAlteracoes() {
-    const dados = {
-        email: document.getElementById('inEmail').value,
-        nome: document.getElementById('inName').value,
-        sobrenome: document.getElementById('inSurname').value,
-        cpf: document.getElementById('inCPF').value,
-        genero: document.querySelector('input[name="inGender"]:checked')?.value || '',
-        nascimento: document.getElementById('inBirthDate').value,
-        senha: document.getElementById('inPassword').value
-    };
-
-    console.log("Dados salvos:", dados);
-    alert("Dados salvos com sucesso!");
-}
-
 /* Support Functions - Basically copied from register.js */
 
 // function to check if the email is available by acessing the local storage data
