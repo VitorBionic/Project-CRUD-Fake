@@ -1,398 +1,143 @@
-/* General */
-* {
-	margin: 0;
-	padding: 0;
-}
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
 
+
+ *{ 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: "Poppins", sans-serif;
+} 
 body {
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-}
-
-body, html {
-    height: 100%;
-}
-
-.wrapper {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    flex-direction: column;
+    align-items: start;
+    min-height: 100vh;
+    padding: 20px 16px; 
+    overflow-y: auto;
+    background-image: url(img/img.png);
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .wrapper {
+    width: 100%;
+    max-width: 500px;
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+   
+.wrapper h1{ 
+    font-size: 36px; 
+    text-align: center; 
+}  
+.container .input-box{  
+    position: relative;
+    width: 100%; 
+    height: 50px;
+    margin: 30px 0; 
 }
-
-
-body {
-    /*#fe7253 x #fcbdb0*/
-    background: rgb(57, 56, 56);
-}
-
-body .container {
-    margin: 0 auto;
-    min-width: 400px;
-    width: 50%;
-    border-radius: 25px;
-    padding: 10px;
-}
-
-body main {
-    background: #ffffff;
-}
-
-body main h1 {
-    text-align: center;
-}
-
-body main ul {
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    list-style: none;
-}
-
-body main ul li a {
-    box-sizing: border-box;
-    display: block;
-    height: 100%;
-    padding: 5px;
-    border-radius: 30px;
+.input-box input { 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(255, 255, 255, 0.1);  
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;  
+    font-size: 16px; 
+    color: #fff; 
+    padding: 15px 20px;
+    outline: none;  
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+} 
+.wrapper .remember-forgot{ 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 15px;   
+} 
+.remember-forgot label input{ 
+    accent-color: #fff; 
+    margin-right: 3px;
+} 
+.remember-forgot a{ 
+    color: #fff; 
     text-decoration: none;
-    color: white;
 }
-
-body #divGoBack button {
-    height: 35px;
-    font-size: 1rem;
-    background: rgb(255, 255, 255);
-    cursor: pointer;
-    border-radius: 25px;
-    width: 75px;
+.remember-forgot a:hover{ 
+    text-decoration: underline;
+} 
+.wrapper .register-link{ 
+    font-size: 15px; 
+    text-align: center; 
+    margin-top: 20px;
+} 
+.register-link p a{ 
+    color: #fff; 
+    text-decoration: none; 
+    font-weight: 500;
+} 
+.register-link  a:hover{ 
+    text-decoration: underline; 
+    color: #f0f0f0;
 }
-
-body #divGoBack button:hover {
-    background: rgb(175, 175, 175);
+.input-box input:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);}
+.input-box input::placeholder{ 
+    color: #fff;
+}   
+.input-box i{ 
+    position: absolute; 
+    right: 20px; 
+    top:100%;
+    transform: translateY(-50%); 
+    font-size: 18px;
 }
-
-/* Home */
-
-body#home main ul {
-    align-items: center;
-}
-
-body#home main ul li {
-    width: 25%;
-    height: 35px;
-    background: rgb(57, 56, 56);
-    border-radius: 30px;
-    cursor: pointer;
-    text-align: center;
-}
-
-body#home main ul li:hover {
-    background: #000000;
-}
-
-/* Login, Register, Profile */
-
-body#login main form ul, body#register main form ul, body#profile main form ul {
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 15px;
-}
-
-body#login main form ul li input, body#register main form ul li input, body#profile main form ul li input {
-    border-radius: 15px;
-    height: 22px;
-    padding: 0 8px;
-}
-
-/* Login, Register */
-
-body#login main form ul li#submit input, body#register main form ul li#submit input {
-    height: 35px;
-    font-size: 1rem;
-    background: rgb(57, 56, 56);
-    cursor: pointer;
-    color: white;
-    
-}
-
-body#login main form ul li#submit input:hover, body#register main form ul li#submit input:hover {
-    background: #000000;
-}
-
-/* Register, Profile, Mainpage - Overlay */
-
-body#register main form ul li#gender, body#profile main form ul li#gender, body#mainpage #overlay form ul li#gender {
-    position: relative;
-    right: 44px;
-}
-
-body#register main form ul li#birthdate, body#profile main form ul li#birthdate, body#mainpage #overlay form ul li#birthdate {
-    position: relative;
-    right: 20px;
-}
-
-body#register main form ul li#gender input, body#profile main form ul li#gender input, body#mainpage #overlay form ul li#gender input {
-    height: 15px;
-}
-
-/* Profile Page */
-body#profile main form ul li#logout input {
-    height: 35px;
-    font-size: 1rem;
-    background: #de2d2d;
-    cursor: pointer;
-    border-radius: 25px;
-    width: 125px;
-}
-
-body#profile main form ul li#logout input:hover {
-    background: #de2d2d;
-}
-
-body#profile main form ul li#salvarAlteracoes input {
-    height: 35px;
-    font-size: 1rem;
-    background: #42de2d;
-    cursor: pointer;
-    border-radius: 25px;
-    width: 125px;
-}
-
-body#profile main form ul li#salvarAlteracoes input:hover {
-    background: #42de2d;
-}
-
-.botoes-container {
-    display: flex;
-    gap: 15px; /* espaçamento entre os botões */
+#submit input { 
+    width: 100%;  
+    padding: 15px; 
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05)); 
+    border: 2px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 35px; 
+    color: #fff; 
+    font-size: 16px; 
+    font-weight: 600; 
+    cursor: pointer; 
+    outline: none; 
+    backdrop-filter: blur(15px);  
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
     margin-top: 20px;
 }
 
-body#profile main form ul li button {
-    border-radius: 15px;
-    height: 22px;
-    font-size: 1rem;
-    background: rgb(57, 56, 56);
-    cursor: pointer;
-    border-radius: 10px;
-    width: 50px;
-    color: white;
+#submit input:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    color: #000;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
 }
+#submit input:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2); 
+}  
+@media (max-height: 500px) {
+    .wrapper {
+      max-height: 100%;
+      padding: 20px 15px;
+    }
+  
+    body {
+      align-items: start;
+      padding-top: 10px;
+    }
+  }
 
-body#profile main form ul li button:hover {
-    background: #000000;
-}
-
-body#profile main form ul li#gender {
-    right: 69px;
-}
-
-body#profile main form ul li#birthdate {
-    right: 25px;
-}
-
-body#profile #overlay form ul li#newGender input {
-    height: 15px;
-}
-
-/* Profile Page, Mainpage - Overlay */
-
-#overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 1;
-}
-
-#overlay div.container {
-    position: relative;
-    box-sizing: border-box;
-    padding-right: 50px;
-    padding-left: 50px;
-    background: #ffffff;
-    min-width: 300px;
-    width: 40%;
-}
-
-#overlay form ul li#submit input {
-    height: 35px;
-    font-size: 1rem;
-    background: rgb(57, 56, 56);
-    cursor: pointer;
-    color: #ffffff;
-}
-#overlay form ul li#submit input:hover {
-    background: #000000;
-}
-
-#overlay button#btClose {
-    position: absolute;
-    right: 15px;
-    top: 15px;
-    font-size: 1.1rem;
-    background: #ffffff;
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    border: none;
-}
-
-/* Mainpage */
-
-body#mainpage .container {
-    min-width: 400px;
-    width: 80%;
-}
-
-body#mainpage main ul {
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 15px;
-}
-
-body#mainpage main ul li#profile button {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    background: #ffffff;
-    cursor: pointer;
-}
-
-body#mainpage main ul li#profile button:hover {
-    background: #000000;
-    color: white;
-}
-
-body#mainpage main ul li#profile button i {
-    font-size: 3rem;
-}
-
-body#mainpage main ul hr {
-    height: 1px;
-    background-color: black;
-    margin: 0 auto;
-    width: 90%;
-    border: none;
-}
-
-body#mainpage main ul li#compliment p {
-    font-size: 1.5rem;
-}
-
-body#mainpage table {
-    border-collapse: collapse;
-}
-
-body#mainpage li#table {
-    width: 100%;
-    overflow: auto;
-}
-
-body#mainpage li#table table {
-    margin: 0 auto;
-}
-
-body#mainpage table th, body#mainpage td {
-    text-align: left;
-    position: relative;
-    border: 1px solid #000000;
-    padding: 8px 30px 8px 8px;
-}
-
-body#mainpage table tr:nth-child(even) {
-    background-color: rgb(57, 56, 56);
-    color: white;
-}
-
-body#mainpage table td.tdDel {
-    border: none;
-    background-color: #ffffff;
-    padding: 8px;
-}
-
-body#mainpage table td.tdDel button.delete {
-    height: 32px;
-    font-size: 1.2rem;
-    background: rgb(57, 56, 56);
-    cursor: pointer;
-    border-radius: 10px;
-    width: 32px;
-    color: white;
-}
-
-body#mainpage table td.tdDel button.delete:hover {
-    background: #000000;
-}
-
-body#mainpage table td button.edit {
-    position: absolute;
-    right: 2px;
-    top: 30%;
-    height: 26px;
-    font-size: 1rem;
-    background: rgb(57, 56, 56);
-    cursor: pointer;
-    border-radius: 10px;
-    width: 26px;
-    color: white;
-}
-
-body#mainpage table td button.edit:hover {
-    background: #000000;
-}
-
-body#mainpage li#options {
-    border-radius: 15px;
-    padding: 12px;
-}
-
-body#mainpage li#options button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 26px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 30px;
-    padding: 8px;
-}
-
-body#mainpage li#options button i {
-    margin-right: 2px;
-}
-
-body#mainpage li#options button#btAdd {
-    background-color: #a3d62e;
-}
-
-body#mainpage li#options button#btAdd:hover {
-    background-color: #93c129;
-}
-
-body#mainpage #overlay div.container {
-    min-width: 300px;
-    width: 40%;
-}
-
-body#mainpage #overlay form ul li input {
-    border-radius: 15px;
-    height: 22px;
-    padding: 0 8px;
-}
-
-body#mainpage #overlay form ul li#submit input {
-    height: 35px;
-}
-
-body#mainpage #overlay form ul li#newGender input {
-    height: 15px;
-}
-
+  

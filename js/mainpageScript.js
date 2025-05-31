@@ -2,12 +2,12 @@ const loggedUser = JSON.parse(localStorage.getItem("currentUser"))
 const users = JSON.parse(localStorage.getItem("users"))
 const usedCPFs = JSON.parse(localStorage.getItem("usedCPFs"))
 
-const complimentParagraph = document.querySelector("li#compliment p")
+const complimentParagraph = document.querySelector("#compliment p")
 const pronoun = loggedUser.gender == "male" ? "o" : loggedUser.gender == "female" ? "a" : "e"
 complimentParagraph.innerText = `Seja bem-vind${pronoun}, ${loggedUser.name}`
 
 
-const table = document.querySelector("table")
+const tableBody = document.querySelector("#userTableBody")
 
 for (const userEmail of Object.keys(users)) {
     createRegistry(userEmail);
@@ -338,9 +338,9 @@ overlay.querySelector("button#btClose").addEventListener("click", () => {
     }
 
     // removing event listener to event "submit" from form element
-    overlay.querySelector("form").removeEventListener("submit", submitEventListenerFunction)
+    overlay.querySelector("form").removeEventListener("submit", submitEventListenerFunction) 
+     overlay.style.display = "flex"
 })
-
 function constructNewRegistryInput() {
     const ul = overlay.querySelector("ul")
 
@@ -720,7 +720,7 @@ function createRegistry(email) {
     tableData8.appendChild(deleteButton)
     tableRow.appendChild(tableData8)
     
-    table.appendChild(tableRow)
+    tableBody.appendChild(tableRow)
 }
 
 function genderTranslator(input) {
@@ -810,4 +810,5 @@ const failUpdate = (errMsg) => {
     updateFailed = true
     // storing the reference to the fail message box to remove it later
     errorBox = listItem
-}
+} 
+

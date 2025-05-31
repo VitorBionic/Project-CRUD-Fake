@@ -37,7 +37,8 @@ inputs[7].value = currentUser.birthdate
 
 /* Setting up the change buttons */
 
-const changeButtons = document.querySelector("ul").getElementsByTagName("button")
+const changeButtons = document.querySelectorAll("button[id^='btChange']")
+
 /*
 changeButtons[0] = btChangeEmail
 changeButtons[1] = btChangeName
@@ -413,4 +414,9 @@ const failUpdate = (errMsg) => {
     updateFailed = true
     // storing the reference to the fail message box to remove it later
     errorBox = listItem
-}
+} 
+// Mostrar overlay
+document.querySelector('#overlay').style.display = 'flex';
+document.body.classList.add('overlay-active');
+document.querySelector('#overlay').style.display = 'none';
+document.body.classList.remove('overlay-active');

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
+<head> 
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -14,7 +14,8 @@
     <script src="https://kit.fontawesome.com/b9fdccf99e.js" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" type="text/css" href="../css/styles.css"> 
+    <link rel="stylesheet" type="text/css" href="../css/erro.css">
 
     <link rel="icon" type="img/png" href="../assets/img/favicon.png">
     <title>Fake CRUD - Login</title>
@@ -24,29 +25,35 @@
         <main class="container">
             <h1>Login</h1>
             <form>
-                <ul>
-                    <li>
+                    <div class="input-box">
                         <label for="inEmail">Email:</label>
                         <br>
-                        <input type="email" id="inEmail" maxlength="50" placeholder="Digite seu email" required>
-                    </li>
-                    <li>
+                        <input type="email" id="inEmail" maxlength="50" placeholder="Digite seu email" required> 
+                        <i class="fa-solid fa-user"></i>
+                    </div> 
+                    <div class="input-box">
                         <label for="inPassword">Senha:</label>
                         <br>
-                        <input type="password" id="inPassword" placeholder="Digite sua senha" maxlength="20" required>
-                    </li>
-                    <li id="submit">
-                        <input type="submit" value="Entrar">
-                    </li>
-                </ul>
+                        <input type="password" id="inPassword" placeholder="Digite sua senha" maxlength="20" required> 
+                        <i class="fa-solid fa-lock"></i>
+                    </div>  
+                    <div class="remember-forgot"> 
+                        <label><input type="checkbox">Lembre-me</label> 
+                    </div>  
+                    <div id="submit"> 
+                        <input type="submit" value="Entrar"> 
+                    </div>
+                    <div class="register-link"> 
+                         <p>Você nâo tem uma conta? <a href="register.html" id="btRegister">Registre-se</a></p>
+                    </div>
             </form>
-        </main>
-        <div id="divGoBack" class="container" onclick="window.location.replace('../index.html')">
-            <button>Voltar</button>
-        </div>
-    </div>
+        </main> 
+
+    </div>  
+
 
     <!-- Custom JS -->
-    <script src="../js/loginScript.js"></script>
+    <script src="../js/loginScript.js"></script> 
+    <script src="/js/verif.js"></script>
 </body>
 </html>

@@ -1,0 +1,292 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+    background-image: url(img/img.png) ; 
+    background-size: cover; 
+    background-position: center;  
+}
+
+.wrapper2 {    
+    width: 90%;
+    max-width: 600px;  
+    background-color:transparent;  
+    border: 2px solid rgba(255,255,255, .2); 
+    backdrop-filter: blur(20px); 
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    color: #fff; 
+    border-radius: 10px; 
+    padding: 15px 20px; 
+    margin-top: 40px;  
+    margin-bottom: 40px;
+}
+
+.wrapper2 h1 {
+    font-size: 28px; 
+    text-align: center; 
+    margin-bottom: 20px;
+    color: #fff;   
+    text-shadow: 1px 1px 3px rgba(53,82,84, 0.5);
+    
+}
+
+.wrapper2 form ul {
+    list-style-type: none;
+    padding: 0;
+} 
+
+.wrapper2 form ul li {
+    margin-bottom: 8px;
+}
+
+.wrapper2 form ul li label {
+    font-weight: 500;
+    color: #ffffff;
+    margin-bottom: 10px;
+    display: block;
+    text-shadow: 2px 2px 5px rgba(53,82,84, 0.7);
+}
+
+.wrapper2 form ul li input[type="text"],
+.wrapper2 form ul li input[type="email"],
+.wrapper2 form ul li input[type="password"],
+.wrapper2 form ul li input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.4s ease;  
+    text-shadow: 0 0 5px rgba(62, 75, 99, 0.6);
+} 
+
+.wrapper2 form ul li input:focus {
+    border-color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+}
+
+.wrapper2 form ul li input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#gender {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+#gender p {
+    font-weight: 600;
+    color: #ddd;
+}
+
+#gender input[type="radio"] {
+    margin-right: 5px;
+    accent-color: #fff;
+}
+
+#gender label {
+    display: inline-block;
+    font-weight: normal;
+}
+
+/* Botão de cadastro */
+#submit input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+    margin-top: 10px;
+}
+
+#submit input[type="submit"]:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    color: #000;
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+}
+
+#submit input[type="submit"]:active {
+    transform: scale(0.98);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+}
+#divGoBack {
+    margin-top: 30px; 
+    text-align: center;
+}
+
+#divGoBack button {
+    padding: 10px 25px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+}
+
+#divGoBack button:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+}
+
+#divGoBack button:active {
+    transform: scale(0.98);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+}
+.button-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.button-group input[type="submit"],
+.button-group button {
+    flex: 1;
+    padding: 12px 20px;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    outline: none;
+    backdrop-filter: blur(15px);
+    transition: all 0.4s ease;
+    max-width: 200px; /* Limita o tamanho dos botões */
+}
+
+.button-group input[type="submit"]:hover,
+.button-group button:hover {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+    color: #000;
+}
+
+.button-group input[type="submit"]:active,
+.button-group button:active {
+    transform: scale(0.98);
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.2);
+} 
+@media screen and (max-width: 768px) {
+    .wrapper2 {
+        padding: 15px 18px;
+    }
+    
+    .wrapper2 h1 {
+        font-size: 26px;
+    }
+    
+    .button-group {
+        gap: 10px;
+    }
+    
+    .button-group input[type="submit"],
+    .button-group button {
+        padding: 10px 15px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .wrapper2 {
+        padding: 12px 15px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .wrapper2 h1 {
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    
+    #gender {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    #gender label {
+        margin-right: 15px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .button-group input[type="submit"],
+    .button-group button {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 5px;
+    }
+    
+    #submit input[type="submit"] {
+        padding: 12px;
+        font-size: 15px;
+    }
+    
+    #divGoBack {
+        margin-top: 20px;
+    }
+    
+    #divGoBack button {
+        width: 100%;
+        padding: 10px 15px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .wrapper2 {
+        padding: 10px;
+    }
+    
+    .wrapper2 h1 {
+        font-size: 20px;
+    }
+    
+    .wrapper2 form ul li label {
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+    
+    .wrapper2 form ul li input[type="text"],
+    .wrapper2 form ul li input[type="email"],
+    .wrapper2 form ul li input[type="password"],
+    .wrapper2 form ul li input[type="date"] {
+        padding: 6px;
+        font-size: 13px;
+    }
+} 

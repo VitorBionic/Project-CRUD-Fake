@@ -14,73 +14,62 @@
     <script src="https://kit.fontawesome.com/b9fdccf99e.js" crossorigin="anonymous"></script>
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="../css/styles.css">
+    <link rel="stylesheet" href="/css/cadastro.css">
 
     <link rel="icon" type="img/png" href="../assets/img/favicon.png">
     <title>Fake CRUD - Cadastro</title>
 </head>
 <body id="register">
-    <div class="wrapper">
-        <main class="container">
+    <div class="wrapper2">
+        <main class="containe2">
             <h1>Cadastro</h1>
             <form>
                 <ul>
                     <li>
                         <label for="inEmail">Email:</label>
-                        <br>
                         <input type="email" id="inEmail" maxlength="50" placeholder="Digite seu email" required>
                     </li>
                     <li>
                         <label for="inName">Nome:</label>
-                        <br>
                         <input type="text" id="inName" maxlength="20" placeholder="Digite seu nome" required>
                     </li>
                     <li>
                         <label for="inSurname">Sobrenome:</label>
-                        <br>
                         <input type="text" id="inSurname" maxlength="40" placeholder="Digite seu sobrenome" required>
                     </li>
                     <li>
                         <label for="inCPF">CPF:</label>
-                        <br>
                         <input type="text" id="inCPF" placeholder="123.456.789-10" required>
                     </li>
                     <li id="gender">
                         <p>Gênero:</p>
-                        
                         <input type="radio" id="male" name="inGender" value="male" required>
                         <label for="male">Masculino</label>
-                        <br>
                         <input type="radio" id="female" name="inGender" value="female">
                         <label for="female">Feminino</label>
-                        <br>
                         <input type="radio" id="nonbinary" name="inGender" value="nonbinary">
                         <label for="nonbinary">Não Binário</label>
                     </li>
                     <li id="birthdate">
                         <label for="inBirthDate">Data de Nascimento:</label>
-                        <br>
                         <input type="date" id="inBirthDate" required>
                     </li>
                     <li>
                         <label for="inPassword">Senha:</label>
-                        <br>
                         <input type="password" id="inPassword" placeholder="Digite sua senha" minlength="8" maxlength="20" required>
                     </li>
                     <li>
                         <label for="inPasswordConfirmation">Confirme sua senha:</label>
-                        <br>
                         <input type="password" id="inPasswordConfirmation" placeholder="Digite sua senha novamente" minlength="8" maxlength="20" required>
                     </li>
-                    <li id="submit">
-                        <input type="submit" value="Cadastrar">
-                    </li>
-                </ul>
+                </ul> 
+                <div class="button-group"> 
+                    <button id="goBackButton" onclick="window.location.replace('../index.html')">Voltar</button>
+                    <input type="submit" value="Cadastrar">
+                </div>
+                
             </form>
         </main>
-        <div id="divGoBack" class="container" onclick="window.location.replace('../index.html')">
-            <button>Voltar</button>
-        </div>
     </div>
 
     <!-- Custom JS -->
