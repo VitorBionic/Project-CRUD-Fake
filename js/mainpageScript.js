@@ -27,6 +27,8 @@ addBtn.addEventListener("click", () => {
     constructNewRegistryInput()
 })
 
+let submitEventListenerFunction
+
 for (const btn of deleteBtns) {
     btn.addEventListener("click", () => {
         overlay.style.display = "flex"
@@ -46,7 +48,7 @@ for (const btn of deleteBtns) {
 
         overlay.querySelector("ul").appendChild(li)
 
-        overlay.querySelector("form").addEventListener("submit", (e) => {
+        submitEventListenerFunction = (e) => {
             e.preventDefault()
 
             const tr = btn.parentElement.parentElement
@@ -62,7 +64,9 @@ for (const btn of deleteBtns) {
                 localStorage.removeItem("currentUser");
 
             window.location.reload()
-        })
+        }
+
+        overlay.querySelector("form").addEventListener("submit", submitEventListenerFunction)
     })
 }
 
@@ -107,8 +111,6 @@ for (const btn of editBtns) {
 let updateFailed = false
 // variable to hold the reference of the fail message box to remove it later
 let errorBox
-
-let submitEventListenerFunction
 
 const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength, minlength, radioOptions, radioOptionsTitle) => {
     let fieldWithFirstLetterInUpperCase = field.charAt(0).toUpperCase() + field.slice(1)
