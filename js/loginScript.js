@@ -52,8 +52,7 @@ const failAuthentication = () => {
     // checking if there is already a authentication fail message box in the screen
     // if there is, it will do nothing; otherwise, it will create it on the screen
     if (!authenticationFailed) {
-        // creating a li html element
-        const listItem = document.createElement("li")
+        const div = document.createElement("div")
         // creating a div html element
         const messageErrorBox = document.createElement("div")
         // creating a text node having error message
@@ -68,10 +67,10 @@ const failAuthentication = () => {
         messageErrorBox.style.padding = "2px 5px"
 
         // putting the div html element inside the li html element
-        listItem.appendChild(messageErrorBox)
+        div.appendChild(messageErrorBox)
 
-        // puting li html element inside the ul html element
-        document.querySelector("ul").appendChild(listItem)
+        // puting div html element inside the form html element
+        document.querySelector("form").appendChild(div)
 
         // turning the flag variable to true to mark that the authentication fail message box is in the screen
         authenticationFailed = true

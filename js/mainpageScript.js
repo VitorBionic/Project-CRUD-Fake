@@ -34,19 +34,19 @@ for (const btn of deleteBtns) {
         overlay.style.display = "flex"
 
         textNode = document.createTextNode("Você tem certeza que quer deletar esse registro? ")
-        overlay.querySelector("h1").appendChild(textNode)
+        overlay.querySelector("h2").appendChild(textNode)
 
-        const li = document.createElement("li")
-        li.setAttribute("id", "submit")
-        constructedElements.push(li)
+        const div = document.createElement("div")
+        div.setAttribute("id", "submit")
+        constructedElements.push(div)
 
         const input = document.createElement("input")
         input.setAttribute("type", "submit")
         input.setAttribute("value", "Sim")
 
-        li.appendChild(input)
+        div.appendChild(input)
 
-        overlay.querySelector("ul").appendChild(li)
+        overlay.querySelector("form").appendChild(div)
 
         submitEventListenerFunction = (e) => {
             e.preventDefault()
@@ -121,20 +121,21 @@ const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength
     }
 
     textNode = document.createTextNode("Alterar " + fieldTitleWithFirstLetterInUpperCase)
-    overlay.querySelector("h1").appendChild(textNode)
-    const ul = overlay.querySelector("ul")
+    overlay.querySelector("h2").appendChild(textNode)
+    const form = overlay.querySelector("form")
 
-    let li = document.createElement("li")
+    let div = document.createElement("div")
+    div.setAttribute("class", "form-group")
     let input
 
     if (fieldType != "radio") {
         const label = document.createElement("label")
         label.setAttribute("for", "inNew" + fieldWithFirstLetterInUpperCase)
         label.innerText = field != "password" && field != "birthdate" ? `Novo ${fieldTitle}: ` : `Nova ${fieldTitle}: `
-        li.appendChild(label)
+        div.appendChild(label)
 
         const br = document.createElement("br")
-        li.appendChild(br)
+        div.appendChild(br)
 
         input = document.createElement("input")
         input.setAttribute("type", fieldType)
@@ -148,19 +149,19 @@ const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength
             input.setAttribute("placeholder", template + fieldTitle)
         }
         input.setAttribute("required", "");
-        li.appendChild(input)
+        div.appendChild(input)
     } else {
-        li.setAttribute("id", "new" + fieldWithFirstLetterInUpperCase)
+        div.setAttribute("id", "new" + fieldWithFirstLetterInUpperCase)
         const p = document.createElement("p")
         const pText = document.createTextNode(`Novo ${fieldTitle}:`)
         p.appendChild(pText)
-        li.appendChild(p)
+        div.appendChild(p)
 
         input = []
         for (let i = 0; i < radioOptions.length; i++) {
             if (i > 0) {
                 const br = document.createElement("br")
-                li.appendChild(br)
+                div.appendChild(br)
             }
             const newInput = document.createElement("input")
             newInput.setAttribute("type", "radio")
@@ -171,30 +172,30 @@ const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength
                 newInput.setAttribute("required", "")
 
             input.push(newInput)
-            li.appendChild(newInput)
+            div.appendChild(newInput)
 
             const label = document.createElement("label")
             label.setAttribute("for", "new" + radioOptions[i])
             label.innerText = radioOptionsTitle[i]
 
-            li.appendChild(label)
+            div.appendChild(label)
         }
     }
 
-    constructedElements.push(li)
-    ul.appendChild(li)
+    constructedElements.push(div)
+    form.appendChild(div)
 
     let confirmInput;
     if (fieldType == "password") {
-        li = document.createElement("li")
+        div = document.createElement("div")
 
         const label = document.createElement("label")
         label.setAttribute("for", "inNew" + fieldWithFirstLetterInUpperCase) + "Confirmation"
         label.innerText = `Confirmação da ${fieldTitle}: `
-        li.appendChild(label)
+        div.appendChild(label)
 
         const br = document.createElement("br")
-        li.appendChild(br)
+        div.appendChild(br)
 
         confirmInput = document.createElement("input")
         confirmInput.setAttribute("type", fieldType)
@@ -205,23 +206,23 @@ const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength
             confirmInput.setAttribute("minlength", minlength)
         confirmInput.setAttribute("placeholder", "Confirme sua " + fieldTitle)
         confirmInput.setAttribute("required", "");
-        li.appendChild(confirmInput)
+        div.appendChild(confirmInput)
 
-        constructedElements.push(li)
+        constructedElements.push(div)
 
-        ul.appendChild(li)
+        form.appendChild(div)
     }
 
-    const liSubmit = document.createElement("li")
-    liSubmit.setAttribute("id", "submit")
-    constructedElements.push(liSubmit)
+    const divSubmit = document.createElement("div")
+    divSubmit.setAttribute("id", "submit")
+    constructedElements.push(divSubmit)
 
     const submitInput = document.createElement("input")
     submitInput.setAttribute("type", "submit")
     submitInput.setAttribute("value", "Alterar")
 
-    liSubmit.appendChild(submitInput)
-    ul.appendChild(liSubmit)
+    divSubmit.appendChild(submitInput)
+    form.appendChild(divSubmit)
 
     const frm = overlay.querySelector("form")
 
@@ -310,7 +311,11 @@ const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength
         }
 
         updatedUser[field] = input.value
-        users[userEmail] = updatedUser
+        if (field == "email")
+            users[input.value] = updatedUser
+        else
+            users[userEmail] = updatedUser
+
         if (loggedUser.email == userEmail)
             localStorage.setItem("currentUser", JSON.stringify(updatedUser))
         localStorage.setItem("users", JSON.stringify(users))
@@ -326,7 +331,7 @@ const constructFieldChange = (userEmail, field, fieldTitle, fieldType, maxlength
 
 // Adding a event listener to event "click" in the overlay close button
 overlay.querySelector("button#btClose").addEventListener("click", () => {
-    overlay.querySelector("h1").removeChild(textNode)
+    overlay.querySelector("h2").removeChild(textNode)
     // removing all constructed elements stored in the array constructedElements
     for (const element of constructedElements)
         element.remove()
@@ -341,91 +346,90 @@ overlay.querySelector("button#btClose").addEventListener("click", () => {
 
     // removing event listener to event "submit" from form element
     overlay.querySelector("form").removeEventListener("submit", submitEventListenerFunction) 
-     overlay.style.display = "flex"
 })
 function constructNewRegistryInput() {
-    const ul = overlay.querySelector("ul")
+    const form = overlay.querySelector("form")
 
     textNode = document.createTextNode("Adicionar Novo Registro")
-    overlay.querySelector("h1").appendChild(textNode)
+    overlay.querySelector("h2").appendChild(textNode)
 
-    const liEmail = document.createElement("li")
+    const divEmail = document.createElement("div")
     const labelEmail = document.createElement("label")
     labelEmail.setAttribute("for", "inEmail")
     const textEmail = document.createTextNode("Email:")
     labelEmail.appendChild(textEmail)
-    liEmail.appendChild(labelEmail)
+    divEmail.appendChild(labelEmail)
     const brEmail = document.createElement("br")
-    liEmail.appendChild(brEmail)
+    divEmail.appendChild(brEmail)
     const inputEmail = document.createElement("input")
     inputEmail.setAttribute("type", "email")
     inputEmail.setAttribute("id", "inEmail")
     inputEmail.setAttribute("maxlength", "50")
     inputEmail.setAttribute("placeholder", "Digite o email")
     inputEmail.setAttribute("required", "")
-    liEmail.appendChild(inputEmail)
-    constructedElements.push(liEmail)
-    ul.appendChild(liEmail)
+    divEmail.appendChild(inputEmail)
+    constructedElements.push(divEmail)
+    form.appendChild(divEmail)
 
-    const liName = document.createElement("li")
+    const divName = document.createElement("div")
     const labelName = document.createElement("label")
     labelName.setAttribute("for", "inName")
     const textName = document.createTextNode("Nome:")
     labelName.appendChild(textName)
-    liName.appendChild(labelName)
+    divName.appendChild(labelName)
     const brName = document.createElement("br")
-    liName.appendChild(brName)
+    divName.appendChild(brName)
     const inputName = document.createElement("input")
     inputName.setAttribute("type", "text")
     inputName.setAttribute("id", "inName")
     inputName.setAttribute("maxlength", "20")
     inputName.setAttribute("placeholder", "Digite o nome")
     inputName.setAttribute("required", "")
-    liName.appendChild(inputName)
-    constructedElements.push(liName)
-    ul.appendChild(liName)
+    divName.appendChild(inputName)
+    constructedElements.push(divName)
+    form.appendChild(divName)
 
-    const liSurname = document.createElement("li")
+    const divSurname = document.createElement("div")
     const labelSurname = document.createElement("label")
     labelSurname.setAttribute("for", "inSurname")
     const textSurname = document.createTextNode("Sobrenome:")
     labelSurname.appendChild(textSurname)
-    liSurname.appendChild(labelSurname)
+    divSurname.appendChild(labelSurname)
     const brSurname = document.createElement("br")
-    liSurname.appendChild(brSurname)
+    divSurname.appendChild(brSurname)
     const inputSurname = document.createElement("input")
     inputSurname.setAttribute("type", "text")
     inputSurname.setAttribute("id", "inSurname")
     inputSurname.setAttribute("maxlength", "40")
     inputSurname.setAttribute("placeholder", "Digite o sobrenome")
     inputSurname.setAttribute("required", "")
-    liSurname.appendChild(inputSurname)
-    constructedElements.push(liSurname)
-    ul.appendChild(liSurname)
+    divSurname.appendChild(inputSurname)
+    constructedElements.push(divSurname)
+    form.appendChild(divSurname)
 
-    const liCPF = document.createElement("li")
+    const divCPF = document.createElement("div")
     const labelCPF = document.createElement("label")
     labelCPF.setAttribute("for", "inCPF")
     const textCPF = document.createTextNode("CPF:")
     labelCPF.appendChild(textCPF)
-    liCPF.appendChild(labelCPF)
+    divCPF.appendChild(labelCPF)
     const brCPF = document.createElement("br")
-    liCPF.appendChild(brCPF)
+    divCPF.appendChild(brCPF)
     const inputCPF = document.createElement("input")
     inputCPF.setAttribute("type", "text")
     inputCPF.setAttribute("id", "inCPF")
     inputCPF.setAttribute("placeholder", "123.456.789-10")
     inputCPF.setAttribute("required", "")
-    liCPF.appendChild(inputCPF)
-    constructedElements.push(liCPF)
-    ul.appendChild(liCPF)
+    divCPF.appendChild(inputCPF)
+    constructedElements.push(divCPF)
+    form.appendChild(divCPF)
 
-    const liGender = document.createElement("li")
-    liGender.setAttribute("id", "gender")
+    const divGender = document.createElement("div")
+    divGender.setAttribute("id", "gender")
     const pGender = document.createElement("p")
     const textGender = document.createTextNode("Gênero:")
     pGender.appendChild(textGender)
-    liGender.appendChild(pGender)
+    divGender.appendChild(pGender)
     const genderOptions = [
         { id: "male", value: "male", label: "Masculino" },
         { id: "female", value: "female", label: "Feminino" },
@@ -445,39 +449,39 @@ function constructNewRegistryInput() {
         const text = document.createTextNode(option.label)
         label.appendChild(text)
 
-        liGender.appendChild(input)
-        liGender.appendChild(label)
+        divGender.appendChild(input)
+        divGender.appendChild(label)
         const br = document.createElement("br")
-        liGender.appendChild(br)
+        divGender.appendChild(br)
     });
-    constructedElements.push(liGender)
-    ul.appendChild(liGender)
+    constructedElements.push(divGender)
+    form.appendChild(divGender)
 
-    const liBirth = document.createElement("li")
-    liBirth.setAttribute("id", "birthdate")
+    const divBirth = document.createElement("div")
+    divBirth.setAttribute("id", "birthdate")
     const labelBirth = document.createElement("label")
     labelBirth.setAttribute("for", "inBirthDate")
     const textBirth = document.createTextNode("Data de Nascimento:")
     labelBirth.appendChild(textBirth)
-    liBirth.appendChild(labelBirth)
+    divBirth.appendChild(labelBirth)
     const brBirth = document.createElement("br")
-    liBirth.appendChild(brBirth);
+    divBirth.appendChild(brBirth);
     const inputBirth = document.createElement("input")
     inputBirth.setAttribute("type", "date")
     inputBirth.setAttribute("id", "inBirthDate")
     inputBirth.setAttribute("required", "")
-    liBirth.appendChild(inputBirth)
-    constructedElements.push(liBirth)
-    ul.appendChild(liBirth)
+    divBirth.appendChild(inputBirth)
+    constructedElements.push(divBirth)
+    form.appendChild(divBirth)
 
-    const liPassword = document.createElement("li")
+    const divPassword = document.createElement("div")
     const labelPassword = document.createElement("label")
     labelPassword.setAttribute("for", "inPassword")
     const textPassword = document.createTextNode("Senha:")
     labelPassword.appendChild(textPassword)
-    liPassword.appendChild(labelPassword)
+    divPassword.appendChild(labelPassword)
     const brPassword = document.createElement("br")
-    liPassword.appendChild(brPassword)
+    divPassword.appendChild(brPassword)
     const inputPassword = document.createElement("input")
     inputPassword.setAttribute("type", "password")
     inputPassword.setAttribute("id", "inPassword")
@@ -485,18 +489,18 @@ function constructNewRegistryInput() {
     inputPassword.setAttribute("minlength", "8")
     inputPassword.setAttribute("maxlength", "20")
     inputPassword.setAttribute("required", "")
-    liPassword.appendChild(inputPassword)
-    constructedElements.push(liPassword);
-    ul.appendChild(liPassword)
+    divPassword.appendChild(inputPassword)
+    constructedElements.push(divPassword);
+    form.appendChild(divPassword)
 
-    const liConfirm = document.createElement("li")
+    const divConfirm = document.createElement("div")
     const labelConfirm = document.createElement("label")
     labelConfirm.setAttribute("for", "inPasswordConfirmation")
     const textConfirm = document.createTextNode("Confirme a senha:")
     labelConfirm.appendChild(textConfirm)
-    liConfirm.appendChild(labelConfirm)
+    divConfirm.appendChild(labelConfirm)
     const brConfirm = document.createElement("br")
-    liConfirm.appendChild(brConfirm)
+    divConfirm.appendChild(brConfirm)
     const inputConfirm = document.createElement("input")
     inputConfirm.setAttribute("type", "password")
     inputConfirm.setAttribute("id", "inPasswordConfirmation")
@@ -504,18 +508,18 @@ function constructNewRegistryInput() {
     inputConfirm.setAttribute("minlength", "8")
     inputConfirm.setAttribute("maxlength", "20")
     inputConfirm.setAttribute("required", "")
-    liConfirm.appendChild(inputConfirm)
-    constructedElements.push(liConfirm)
-    ul.appendChild(liConfirm)
+    divConfirm.appendChild(inputConfirm)
+    constructedElements.push(divConfirm)
+    form.appendChild(divConfirm)
 
-    const liSubmit = document.createElement("li")
-    liSubmit.setAttribute("id", "submit")
+    const divSubmit = document.createElement("div")
+    divSubmit.setAttribute("id", "submit")
     const inputSubmit = document.createElement("input")
     inputSubmit.setAttribute("type", "submit")
     inputSubmit.setAttribute("value", "Adicionar")
-    liSubmit.appendChild(inputSubmit)
-    constructedElements.push(liSubmit)
-    ul.appendChild(liSubmit)
+    divSubmit.appendChild(inputSubmit)
+    constructedElements.push(divSubmit)
+    form.appendChild(divSubmit)
 
     const genderInputs = document.getElementsByName("inGender")
     const inputs = overlay.getElementsByTagName("input")
@@ -787,8 +791,8 @@ const checkPassword = (pass, confirmPass) => pass == confirmPass
 
 // function to create a fail message box in user screen with the text passed by parameter
 const failUpdate = (errMsg) => {
-    // creating a li html element
-    const listItem = document.createElement("li")
+    // creating a div html element
+    const listItem = document.createElement("div")
     // creating a div html element
     const messageErrorBox = document.createElement("div")
     // creating a text node having error message passed by parameter
@@ -802,11 +806,11 @@ const failUpdate = (errMsg) => {
     messageErrorBox.style.border = "1px solid red"
     messageErrorBox.style.padding = "2px 5px"
 
-    // putting the div html element inside the li html element
+    // putting the div html element inside the div html element
     listItem.appendChild(messageErrorBox)
 
-    // puting li html element inside the ul html element
-    overlay.querySelector("ul").appendChild(listItem)
+    // puting div html element inside the form html element
+    overlay.querySelector("form").appendChild(listItem)
 
     // Updating flag variable to true
     updateFailed = true

@@ -398,9 +398,4 @@ const failUpdate = (errMsg) => {
     updateFailed = true
     // storing the reference to the fail message box to remove it later
     errorBox = listItem
-} 
-// Mostrar overlay
-document.querySelector('#overlay').style.display = 'flex';
-document.body.classList.add('overlay-active');
-document.querySelector('#overlay').style.display = 'none';
-document.body.classList.remove('overlay-active');
+}
