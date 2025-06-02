@@ -1,6 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
-
-
  *{ 
     margin: 0; 
     padding: 0; 
@@ -18,7 +16,6 @@ body {
     background-size: cover;
     background-position: center;
   }
-  
   .wrapper {
     width: 100%;
     max-width: 500px;
@@ -33,10 +30,12 @@ body {
     max-height: 90vh;
     overflow-y: auto;
   }
-   
 .wrapper h1{ 
-    font-size: 36px; 
-    text-align: center; 
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 20px; 
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.4),
+               0 0 20px rgba(31, 37, 70, 0.486);
 }  
 .container .input-box{  
     position: relative;
@@ -101,7 +100,6 @@ body {
     transform: translateY(-50%); 
     font-size: 18px;
 }
-<<<<<<< HEAD
 #submit input { 
     width: 100%;  
     padding: 15px; 
@@ -115,92 +113,12 @@ body {
     outline: none; 
     backdrop-filter: blur(15px);  
     transition: all 0.3s ease;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
-    margin-top: 20px;
-=======
-
-/* Home */
-
-body#home main ul {
-    align-items: center;
+     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 20px; 
 }
-
-body#home main ul li {
-    width: 25%;
-    height: 35px;
-    background: rgb(57, 56, 56);
-    border-radius: 30px;
-    cursor: pointer;
-    text-align: center;
-}
-
-body#home main ul li:hover {
-    background: #000000;
-}
-
-/* Login, Register, Profile */
-
-body#login main form ul, body#register main form ul, body#profile main form ul {
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 15px;
-}
-
-body#login main form ul li input, body#register main form ul li input, body#profile main form ul li input {
-    border-radius: 15px;
-    height: 22px;
-    padding: 0 8px;
-}
-
-/* Login, Register */
-
-body#login main form ul li#submit input, body#register main form ul li#submit input {
-    height: 35px;
-    font-size: 1rem;
-    background: rgb(57, 56, 56);
-    cursor: pointer;
-    color: white;
-    
-}
-
-body#login main form ul li#submit input:hover, body#register main form ul li#submit input:hover {
-    background: #000000;
-}
-
-/* Register, Profile, Mainpage - Overlay */
-
-body#register main form ul li#gender, body#profile main form ul li#gender, body#mainpage #overlay form ul li#gender {
-    position: relative;
-    right: 44px;
-}
-
-body#register main form ul li#birthdate, body#profile main form ul li#birthdate, body#mainpage #overlay form ul li#birthdate {
-    position: relative;
-    right: 20px;
-}
-
-body#register main form ul li#gender input, body#profile main form ul li#gender input, body#mainpage #overlay form ul li#gender input {
-    height: 15px;
-}
-
-/* Profile Page */
-body#profile main form ul li#logout input {
-    height: 35px;
-    font-size: 1rem;
-    background: #de332d;
-    cursor: pointer;
-    border-radius: 25px;
-    width: 125px;
-}
-
-body#profile main form ul li#logout input:hover {
-    background: #ab1b17;
->>>>>>> 643d72f43c1fb4b19a59e1c542365c685d67330a
-}
-
 #submit input:hover {
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
-    color: #000;
+    color: #395658;
     border-color: rgba(255, 255, 255, 0.4);
     box-shadow: 0 8px 30px rgba(255, 255, 255, 0.4);
 }
@@ -218,6 +136,4 @@ body#profile main form ul li#logout input:hover {
       align-items: start;
       padding-top: 10px;
     }
-  }
-
-  
+}

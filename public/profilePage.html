@@ -15,7 +15,7 @@
 <body id="profile">
     <div class="wrapper">
         <main class="container">
-            <h1>Meu perfil</h1>
+            <h1>Meu Perfil</h1>
             <form id="profileForm"> 
             
 
@@ -59,13 +59,13 @@
                     <input type="password" id="inPassword" value="********" readonly>
                     <button type="button" id="btChangePassword"><i class="fa-regular fa-pen-to-square"></i></button>
                 </div>
-                <div id="botoesAcoes">
-                    <div id="logout">
-                        <input type="button" onclick="logout()" value="Sair da Conta" class="glass-button">
-                    </div>
-                </div>
+              
+            
             </form>
-
+                <div id="botoesAcoes"> 
+                <button class="glass-button" onclick="logout()" type="button">Sair da Conta</button>
+                <button class="glass-button" onclick="window.location.href = './mainpage.html'" type="button">Voltar</button> 
+               </div> 
             <div id="overlay">
                 <div class="container">
                     <button id="btClose"><i class="fa-solid fa-x"></i></button>
@@ -82,10 +82,6 @@
 
         </main> 
 
-
-        <div id="divGoBack" class="container" onclick="window.location.href = './mainpage.html'">
-            <button class="glass-button">Voltar</button>
-        </div>
     </div>
     <script src="../js/profilePageScript.js"></script>
     <script src="../js/script.js"></script>
